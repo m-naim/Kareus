@@ -1,0 +1,25 @@
+@media (max-width: 480px){
+    .task-container{ 
+        width: 100vw;
+        height: 100vh;
+        z-index: 1000;
+        position: fixed;
+        right: 0;
+        top: 0;
+      }
+    .slider ,.left-model,
+    .right-model{
+        width: 100vw;
+      }
+    .login-card {
+        padding: 20px;
+        min-width: calc(100vw-20px);
+        width: 100vw !important;
+        height: 100vh;
+      }
+    .side-container {
+        min-width: 100vw;
+      }
+
+  
+}

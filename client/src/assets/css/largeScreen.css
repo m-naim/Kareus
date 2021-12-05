@@ -1,0 +1,22 @@
+@media (min-width: 1000px){
+    .task-container{
+        width: 40vw ;
+        z-index: 100;
+      }
+    .slider {
+        width: 30vw;
+      }
+    
+    .left-model,
+    .right-model{
+        width: 30vw;
+    }
+    .login-card {
+        width: 50vw;
+      }
+    .side-container {
+        width: 20vw;
+        min-width: 360px;
+        z-index: 200;
+    }
+}

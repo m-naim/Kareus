@@ -1,0 +1,6 @@
+.list {
+    width: 100%;
+    min-width: 280px;
+    overflow: auto;
+    max-height: 75vh;
+  }
