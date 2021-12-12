@@ -2,7 +2,6 @@ const List = require('../models/List');
 
 module.exports = {
   newList: (req, res) => {
-    console.log(req.body.token);
     const newList = new List({
       name: req.body.name,
     });

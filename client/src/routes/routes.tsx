@@ -10,6 +10,9 @@ import Home from '../pages/home/Home';
 import { SessionContextProvider } from '../context/SessionContextProvider';
 import Register from '../pages/register/register';
 
+import Watchlists from '../pages/watchlists/Watchlists';
+import Predictions from '../pages/predictions/Predictions';
+
 const Routes = (
   <ScopedCssBaseline>
     <Router>
@@ -22,6 +25,15 @@ const Routes = (
             <Register />
           </Route>
           <PrivateRoute path="/app">
+            <App />
+          </PrivateRoute>
+          <PrivateRoute path="/predictions">
+            <Predictions />
+          </PrivateRoute>
+          <PrivateRoute path="/watchlists">
+            <Watchlists />
+          </PrivateRoute>
+          <PrivateRoute path="/portfolios">
             <App />
           </PrivateRoute>
 

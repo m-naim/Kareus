@@ -17,7 +17,6 @@ export const AppContextProvider = ({ children }) => {
   const fetchAPI = useCallback(async () => {
     try {
       const data = await stateService.getState(session.user.id);
-      console.log(data);
       dispatch({
         type: 'UPDATE',
         payload: data,
@@ -29,7 +28,6 @@ export const AppContextProvider = ({ children }) => {
         payload: newState,
       });
       stateService.postState(newState);
-      console.log(error);
     }
   }, []);
 

@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const stateSchema = new mongoose.Schema(
   {
     userId: String,
-      
+
     lists: [
-        { 
-          id: String, 
-          title: String 
-        },
+      {
+        id: String,
+        title: String,
+      },
     ],
     tasks: [
       {
@@ -25,8 +25,7 @@ const stateSchema = new mongoose.Schema(
     },
     selectedList: String,
     selectedTask: String,
-  }
+  },
 );
-
 
 module.exports = mongoose.model('state', stateSchema);

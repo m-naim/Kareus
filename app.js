@@ -9,9 +9,11 @@ const passport = require('passport');
 const users = require('./routes/users');
 const authRouter = require('./routes/auth.router');
 const subscription = require('./routes/subscription');
-const test= require('./routes/test');
-const state= require('./routes/state');
-const jwtAuthrouter= require('./routes/jwtAuth.router');
+const state = require('./routes/state');
+const jwtAuthrouter = require('./routes/jwtAuth.router');
+const portfolio = require('./routes/portfolio');
+const stock = require('./routes/stock');
+const predictions = require('./routes/predictions');
 
 require('dotenv').config();
 
@@ -30,8 +32,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-
 
 const session = expressSession({
   secret: '60dd06aa-cf8e-4cf8-8925-6de720015ebf',
@@ -53,10 +53,13 @@ passport.deserializeUser((user, done) => {
 });
 
 app.use('/', authRouter);
-app.use('/',jwtAuthrouter)
+app.use('/', jwtAuthrouter);
 app.use('/users', users);
 app.use('/subscription', subscription);
 app.use('/state', state);
+app.use('/', portfolio);
+app.use('/', predictions);
+app.use('/', stock);
 // app.use('/', test);
 
 module.exports = app;

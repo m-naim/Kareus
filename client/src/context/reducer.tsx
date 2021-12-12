@@ -63,7 +63,7 @@ const reducer = (state: State, action: Actions): State => {
     case 'OPEN_MODEL':
       return {
         ...state,
-        model: { ...state.model, open: true, ...action.payload },
+        model: { ...state.model,...action.payload, open: true },
       };
 
     case 'CLOSE_MODEL':

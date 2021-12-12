@@ -1,14 +1,12 @@
 import React from 'react';
 import {
-  ThemeProvider, createMuiTheme,
+  ThemeProvider, createMuiTheme, Link, Button,
 } from '@material-ui/core';
-import TaskContainer from './tasks/TaskContainer';
-import SideBar from './sideBar/sideBar.jsx';
-import StatesBar from './statistics/StatesBar';
-import SliderModel from './slider/SliderModel';
+
 import useSettings from '../../localStore/settings';
-import { AppContextProvider } from '../../context/AppContextProvider';
-import { green, purple } from '@material-ui/core/colors';
+
+import PortfolioPage from './PortfolioPage';
+import AppNav from '../../components/AppNav';
 
 function App(): React.ReactElement {
   const [settings] = useSettings();
@@ -22,16 +20,10 @@ function App(): React.ReactElement {
     [settings],
   );
   return (
-    <ThemeProvider theme={themeType}>
-      <AppContextProvider>
-        <main className="main-container">
-          <SideBar />
-          <TaskContainer />
-          <StatesBar />
-          <SliderModel />
-        </main>
-      </AppContextProvider>
-    </ThemeProvider>
+    <div>
+      <AppNav/>
+      <PortfolioPage/>
+    </div>
   );
 }
 
