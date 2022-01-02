@@ -9,6 +9,7 @@ const host = process.env.HOSTNAME || 'localhost';
 
 job.start();
 
+console.log(`env: ${process.env.node_env}`);
 if (process.env.node_env === 'production') {
   app.use(express.static(path.join(__dirname, 'client', 'build')));
   app.get('*', (req, res) => {
