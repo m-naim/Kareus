@@ -1,4 +1,6 @@
 const socketio = require('socket.io');
+const express = require('express');
+const path = require('path');
 const app = require('./app');
 const job = require('./scheduled/updateStocks');
 
@@ -10,6 +12,14 @@ job.start();
 const server = app.listen(port, () => {
   console.log(`Node.js API server is listening on http://${host}:${port}/`);
 });
+
+if (process.env.node_env === 'production') {
+  app.use(express.static(path.join(__dirname, 'client', 'build')));
+  app.get('*', (req, res) => {
+    console.log(`port: ${process.env.PORT}`);
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 
 const io = socketio(server);
 io.on('connection', () => {
