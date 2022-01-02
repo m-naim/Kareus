@@ -10,14 +10,5 @@ module.exports = {
     newTask.save().then((data) => res.send(data))
       .catch(next);
   },
-  get: (req, res) => {
-    Portfolio.findOne({
-      name: 'current',
-    })
-      .exec((err, state) => {
-        if (err) res.status(500).send({ error: 'Something failed!' });
-        else if (!state || state.length === 0) res.status(404).send({ message: 'not found' });
-        else res.send(state);
-      });
-  },
+
 };

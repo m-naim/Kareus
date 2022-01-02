@@ -12,6 +12,7 @@ import Register from '../pages/register/register';
 
 import Watchlists from '../pages/watchlists/Watchlists';
 import Predictions from '../pages/predictions/Predictions';
+import Portfolios from '../pages/app/Portfolios';
 
 const Routes = (
   <ScopedCssBaseline>
@@ -34,7 +35,7 @@ const Routes = (
             <Watchlists />
           </PrivateRoute>
           <PrivateRoute path="/portfolios">
-            <App />
+            <Portfolios/>
           </PrivateRoute>
 
           <Route path="/">

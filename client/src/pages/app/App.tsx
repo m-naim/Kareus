@@ -7,6 +7,7 @@ import useSettings from '../../localStore/settings';
 
 import PortfolioPage from './PortfolioPage';
 import AppNav from '../../components/AppNav';
+import Portfolios from './Portfolios';
 
 function App(): React.ReactElement {
   const [settings] = useSettings();
@@ -22,7 +23,7 @@ function App(): React.ReactElement {
   return (
     <div>
       <AppNav/>
-      <PortfolioPage/>
+      <Portfolios/>
     </div>
   );
 }

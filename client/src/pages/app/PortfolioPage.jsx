@@ -5,9 +5,10 @@ import axios from 'axios';
 import AllocationPie from './AllocationPie';
 import Performance from './Performance';
 import config from '../../config.js';
+import portfolioService from '../../services/portfolioService';
 
 const API_URL = config.API_URL+'/api/v1/portfolio'
-function PortfolioPage(props) {
+function PortfolioPage({name}) {
     const [view, setView]= useState('p')
     const [portfolio, setPortfolio] = useState({allocation:[],transactions:[]});
 
@@ -20,7 +21,9 @@ function PortfolioPage(props) {
     }
 
     const fetchData = async () => {
-        const { data } = await axios.get(API_URL);
+        console.log(name);
+        const data = await portfolioService.get(name);
+        console.log(data);
         data.allocation.forEach((item, i) => {
             item.id = i + 1;
         });
