@@ -4,8 +4,8 @@ const config = {
     facebook_callbackURL: 'http://localhost:8000/auth/facebook/callback',
   },
   production: {
-    google_callbackURL: 'https://ephyon.herokuapp.com/auth/google/callback',
-    facebook_callbackURL: 'https://ephyon.herokuapp.com/auth/facebook/callback',
+    google_callbackURL: 'https://kareus.herokuapp.com/auth/google/callback',
+    facebook_callbackURL: 'https://kareus.herokuapp.com/auth/facebook/callback',
   },
 };
 
