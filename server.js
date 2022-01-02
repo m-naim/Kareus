@@ -9,10 +9,6 @@ const host = process.env.HOSTNAME || 'localhost';
 
 job.start();
 
-const server = app.listen(port, () => {
-  console.log(`Node.js API server is listening on http://${host}:${port}/`);
-});
-
 if (process.env.node_env === 'production') {
   app.use(express.static(path.join(__dirname, 'client', 'build')));
   app.get('*', (req, res) => {
@@ -20,6 +16,9 @@ if (process.env.node_env === 'production') {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
   });
 }
+const server = app.listen(port, () => {
+  console.log(`Node.js API server is listening on http://${host}:${port}/`);
+});
 
 const io = socketio(server);
 io.on('connection', () => {
