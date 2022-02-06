@@ -4,7 +4,6 @@ import AppNav from '../../components/AppNav';
 function Watchlists(props) {
     return (
         <div>
-            <AppNav/>
         </div>
     );
 }

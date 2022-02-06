@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -79,6 +80,8 @@ a{
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  align-items: center;
+  width: 100%;
 }
 
 .list{
@@ -108,7 +111,20 @@ a{
 }
 
 .centered-container{
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
   align-items: center;
+  width: 100%;
+}
+
+.container-space-btwn{
+  display: flex;
+  flex-direction: row;
+  padding: 12px;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
 }
 
 

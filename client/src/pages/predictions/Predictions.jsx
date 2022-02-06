@@ -20,7 +20,6 @@ function Predictions(props) {
     },[]);
     return (
         <div>
-            <AppNav />
             <div style={{display: 'flex',justifyContent: 'center',padding:'5px'}}>
                 <Paper style={{ display: 'flex', flexDirection: 'column', width: '60%' ,height:'70%'}}>
                     <DataGrid

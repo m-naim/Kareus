@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom';
+import './index.css';
 import './assets/css/index.css';
 import './assets/css/smallScreen.css';
 import './assets/css/largeScreen.css';

@@ -1,8 +1,7 @@
-import { Paper } from '@material-ui/core';
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2'
-
 import  palette  from 'google-palette';
+
 const CHART_COLORS = {
   red: 'rgb(255, 99, 132)',
   orange: 'rgb(255, 159, 64)',
@@ -25,9 +24,6 @@ const data = {
     }
   ]
 };
-
-
-
 
 const chartOptions = {
   responsive: true,
@@ -69,11 +65,11 @@ function AllocationPie({ adata }) {
       return '#' + hex;
     })
   }
-  return !!adata && adata.length>0 ? (
-    <Paper style={{ width: "440px", height: "500px",padding:'10px' }}>
+  return (
+    <div style={{ width: "440px", height: "500px",padding:'10px' }}>
       <Doughnut data={data} options={chartOptions} />
-    </Paper>
-  ) : <></>;
+    </div>
+  ) ;
 }
 
 export default AllocationPie;

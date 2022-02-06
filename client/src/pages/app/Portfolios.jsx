@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useState } from 'react';
-import AppNav from '../../components/AppNav';
 import portfolioService from '../../services/portfolioService';
-import PortfolioPage from './PortfolioPage';
+import './index.css'
+import { Link } from 'react-router-dom';
 
 function Portfolios(props) {
     const [pftArray, setPftArray] = useState([]);
@@ -14,15 +14,26 @@ function Portfolios(props) {
         fetchData();
     }, []);
     return (
-        <div>
-            <AppNav />
-            <div>
+        <div className='centered-container'>
+               
+            <div className='list-container'>
                 {pftArray.map(pft => 
-                    <div onClick={()=>{setSelectedPft(pft.name)}}>{pft.name}</div>
+                            <Link className='flex flex-column box-border'  to={`/app/portfolios/${pft.name}`}>
+                                <div className=''>{pft.name}</div>
+                                <div className=''>
+                                    <div className='font-bold '>Valuer</div>
+                                    <div>1000€</div>
+                                </div>
+                                <div className=''>
+                                    <div className='' >Variation</div>
+                                    <div>+10%</div>
+                                </div>
+                                <div className=''>
+                                    <div className=''>Positions</div>
+                                    <div>10</div>
+                                </div>
+                            </Link>
                 )}
-            </div>
-            <div>
-                {selectedPft!==""?<PortfolioPage name={selectedPft}/>:<></>}
             </div>
         </div>
     );

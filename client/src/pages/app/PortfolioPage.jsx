@@ -7,30 +7,36 @@ import Performance from './Performance';
 import config from '../../config.js';
 import portfolioService from '../../services/portfolioService';
 
-const API_URL = config.API_URL+'/api/v1/portfolio'
-function PortfolioPage({name}) {
-    const [view, setView]= useState('p')
-    const [portfolio, setPortfolio] = useState({allocation:[],transactions:[]});
+import {
+     Link, Switch,useParams
+  } from 'react-router-dom';
+import PrivateRoute from '../../routes/privateRoute';
+import { Typography } from '@material-ui/core';
 
-    const togleView= ()=>{
-        if(view==='p') return <PortfolioList rows={portfolio.allocation}/>
-        if(view==='o') return <Orders rows={portfolio.transactions} />
-        if(view==='r') return <Performance/>
-        if(view==='pie') return <AllocationPie adata={portfolio.allocation}/>
-        return <div>Error</div>
-    }
+
+const API_URL = config.API_URL+'/api/v1/portfolio'
+function PortfolioPage(props) {
+    const [portfolio, setPortfolio] = useState({allocation:[],transactions:[]});
+    let {name}= useParams();
 
     const fetchData = async () => {
         console.log(name);
-        const data = await portfolioService.get(name);
-        console.log(data);
-        data.allocation.forEach((item, i) => {
-            item.id = i + 1;
-        });
-        data.transactions.forEach((item, i) => {
-            item.id = i + 1;
-        });
-        setPortfolio(data);
+        try{
+            const data = await portfolioService.get(name);
+            console.log(data);
+            data.allocation.forEach((item, i) => {
+                item.id = i + 1;
+            });
+
+            data.transactions.forEach((item, i) => {
+                item.id = i + 1;
+            });
+            setPortfolio(data);
+        }
+        catch{
+            console.log("error api");
+            setPortfolio({allocation:[],transactions:[]});
+        }
     };
 
     useLayoutEffect(() => {
@@ -39,20 +45,27 @@ function PortfolioPage({name}) {
 
     return (
         <div style={{display: 'flex',flexDirection:'column',justifyContent: 'space-evenly',padding:'5px'}}>
-            <div>
-                <div style={{display: 'flex',justifyContent: 'space-evenly'}}>
-                    <p onClick={()=>setView('p')}>Allocation</p>
-                    <p onClick={()=>setView('o')}>Orders</p>
-                    <p onClick={()=>setView('r')}>Preformance</p>
-                    <p onClick={()=>setView('pie')}>Pies</p>
+            <div className='centered-container'>
+                <Typography variant="h3" >{name}</Typography>
+                <div className='container-space-btwn' style={{justifyContent: 'space-evenly'}}>
+                    <Link to={`/app/portfolios/${name}/Allocation`}>Allocation</Link>
+                    <Link to={`/app/portfolios/${name}/Preformance`}>Preformance</Link>
+                    <Link to={`/app/portfolios/${name}/Pies`}>Pies</Link>
+                    <Link to={`/app/portfolios/${name}/Orders`}>Orders</Link>
                 </div>
                 <div style={{display:'flex', flexDirection: "column", alignItems:'center'}} >
-                    { togleView()}
+                <Switch>
+                    <PrivateRoute exact path="/app/portfolios/:name"><PortfolioList rows={portfolio.allocation}/></PrivateRoute>
+                    <PrivateRoute path="/app/portfolios/:name/Allocation"><PortfolioList rows={portfolio.allocation}/></PrivateRoute>
+                    <PrivateRoute path="/app/portfolios/:name/Pies"><AllocationPie/><AllocationPie adata={portfolio.allocation}/></PrivateRoute>
+                    <PrivateRoute path="/app/portfolios/:name/Orders"><Orders rows={portfolio.transactions} /></PrivateRoute>
+                    <PrivateRoute path="/app/portfolios/:name/Preformance"><Performance/></PrivateRoute>
+                </Switch>
                 </div>
             </div>
             <div style={{display: 'flex',flexDirection:'column',
                 alignItems:'center', justifyContent: 'space-evenly'}}>
-               
+    
             </div>
         </div>
     );

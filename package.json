@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server.js",
-    "client": "cd client && npm start",
+    "client": "cd client.v2 && npm start",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "start": "node server.js",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
@@ -34,9 +34,12 @@
     "web-push": "^3.4.5"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.25.3",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "postcss": "^8.4.5",
+    "tailwindcss": "^3.0.12"
   }
 }

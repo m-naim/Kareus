@@ -9,8 +9,8 @@ async function CheckError(response) {
   if (response.status >= 200 && response.status <= 299) {
     return data;
   }
-  // throw Error(data.msg);
   console.log(response.status);
+  throw Error(data.msg);
 }
 
 

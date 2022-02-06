@@ -12,7 +12,8 @@ import Logo from '../../components/logo';
 
 const Login = () => {
   const socket = io(config.API_URL);
-  const providers = [{ name: 'google', svg: google }, { name: 'facebook', svg: facebook }];
+  const providers:any[] = [];
+  // [{ name: 'google', svg: google }, { name: 'facebook', svg: facebook }];
 
 
   return (

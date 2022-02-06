@@ -23,7 +23,6 @@ function App(): React.ReactElement {
   return (
     <div>
       <AppNav/>
-      <Portfolios/>
     </div>
   );
 }

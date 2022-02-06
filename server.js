@@ -11,10 +11,10 @@ job.start();
 
 console.log(`env: ${process.env.node_env}`);
 if (process.env.node_env === 'production') {
-  app.use(express.static(path.join(__dirname, 'client', 'build')));
+  app.use(express.static(path.join(__dirname, 'client.v2', 'build')));
   app.get('*', (req, res) => {
     console.log(`port: ${process.env.PORT}`);
-    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client.v2', 'build', 'index.html'));
   });
 }
 const server = app.listen(port, () => {
