@@ -9,7 +9,7 @@
     "client": "cd client.v2 && npm start",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "start": "node server.js",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    "heroku-postbuild": "cd client.v2 && npm install --only=dev && npm install && npm run build"
   },
   "author": "naim",
   "license": "ISC",

@@ -13,6 +13,7 @@ import Performance from './pages/Portfolios/Performance';
 import { Chart, registerables  } from 'chart.js'
 
 Chart.register(...registerables)
+
 function App() {
   return (
     <div className="h-screen">

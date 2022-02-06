@@ -1,12 +1,9 @@
 import React from 'react';
-import { Link, Outlet, useMatch, useParams, useResolvedPath } from 'react-router-dom';
+import {Outlet, useParams } from 'react-router-dom';
 import CustomLink from '../../components/CustomLink';
 
 function PortfolioView({ children, to, ...props }) {
     const {name} = useParams();
-    // let resolved = useResolvedPath(to);
-    // let match = useMatch({ path: resolved.pathname, end: true });
-
     
     return (
         <div className=' flex w-fill flex-col mx-40 '>
