@@ -9,7 +9,7 @@ const config = {
 
   },
   production: {
-    API_URL: 'https://karius.herokuapp.com',
+    API_URL: 'https://kareus.herokuapp.com',
     amqpUrl: 'amqp://localhost:5672',
     QAPI_URL: 'https://qapi.herokuapp.com',
   },
