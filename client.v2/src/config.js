@@ -9,9 +9,9 @@ const config = {
 
   },
   production: {
-    API_URL: 'https://ephyon.herokuapp.com',
+    API_URL: 'https://karius.herokuapp.com',
     amqpUrl: 'amqp://localhost:5672',
-
+    QAPI_URL: 'https://qapi.herokuapp.com',
   },
 };
 export const env = process.env.NODE_ENV || 'dev';
