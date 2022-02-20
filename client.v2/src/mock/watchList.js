@@ -1,5 +1,5 @@
 const watchList={
-    columns  : ['CODE','NOM','PRIX','QUANTITÉ','VALEUR'],
+    columns  : ['symbol','NOM','PRIX','QUANTITÉ','VALEUR'],
     rows  : [
         {CODE:'MSFT',NOM:'Microsoft',PEG:3,VALEUR:200, QUANTITÉ:1},
         {CODE:'XPAR:TTE',NOM:'Microsoft',PEG:2,VALEUR:200, QUANTITÉ:1},

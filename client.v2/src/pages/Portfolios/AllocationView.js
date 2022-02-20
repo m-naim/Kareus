@@ -3,7 +3,7 @@ import Table from '../../components/Table';
 import { useParams } from 'react-router-dom';
 import portfolioService from '../../services/portfolioService'
 
-const columns=['symbol','weight','last','name','qty','bpe'] 
+const columns=['symbol','weight','qty','last','bpe'] 
 function AllocationView(props) {
     const {name} = useParams();
     const [portfolio, setPortfolio] = useState({allocation:[],transactions:[]});

@@ -1,26 +1,16 @@
-import React from 'react';
+import {React,useState,useEffect} from 'react';
+import { useParams } from 'react-router-dom';
 import { Doughnut } from 'react-chartjs-2'
 import  palette  from 'google-palette';
+import portfolioService from '../../services/portfolioService'
 
-const CHART_COLORS = {
-  red: 'rgb(255, 99, 132)',
-  orange: 'rgb(255, 159, 64)',
-  yellow: 'rgb(255, 205, 86)',
-  green: 'rgb(75, 192, 192)',
-  blue: 'rgb(54, 162, 235)',
-  purple: 'rgb(153, 102, 255)',
-  grey: 'rgb(201, 203, 207)'
-};
 
 const data = {
-  labels: ['Overall Yay', 'Overall Nay', 'Group A Yay', 'Group A Nay', 'Group B Yay', 'Group B Nay', 'Group C Yay', 'Group C Nay'],
+  labels: [ 'a','b'],
   datasets: [
     {
-      backgroundColor: palette('tol-rainbow', 10).map(function(hex) {
-        return '#' + hex;
-      }),
-      data: [33, 67],
-      label:'hello'
+      backgroundColor: palette('tol-rainbow', 10).map((hex)=> '#'+hex),
+      data: [10.1,20],
     }
   ]
 };
@@ -58,16 +48,47 @@ const chartOptions = {
 }
 
 function AllocationPie({ adata }) {
-  if (adata != null) {
-    data.labels = adata.map(s => s.symbol)
-    data.datasets[0].data = adata.map(s => s.weight * 100)
-    data.datasets[0].backgroundColor=palette('tol-rainbow', adata.length).map(function(hex) {
+  const {name} = useParams();
+  const[display,setDisplay]=useState(data);
+  const fetchData = async () => {
+      try{
+          const result = await portfolioService.get(name);
+          result.allocation= result.allocation.map((item, i) => {
+              item.id = i + 1;
+              return {...item, ...item.asset}
+          });
+
+          result.transactions.forEach((item, i) => {
+              item.id = i + 1;
+          });
+          console.log(result.allocation);
+          prepareData(result);
+          
+      }
+      catch{
+          console.log("error api");
+      }
+  };
+
+  
+
+  const prepareData= (pfData)=> {
+    const {allocation}= pfData;
+    data.labels = allocation.map(s => s.name)
+    data.datasets[0].data = allocation.map(s => s.weight * 100)
+    data.datasets[0].backgroundColor=palette('tol-rainbow', allocation.length).map(function(hex) {
       return '#' + hex;
     })
-  }
+    setDisplay(data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  },[]);
+
   return (
     <div style={{ width: "440px", height: "500px",padding:'10px' }}>
-      <Doughnut data={data} options={chartOptions} />
+      <Doughnut data={display} options={chartOptions} />
     </div>
   ) ;
 }

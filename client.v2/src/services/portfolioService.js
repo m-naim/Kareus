@@ -5,6 +5,10 @@ function getAll() {
   return http.get(`/api/v1/portfolios/`);
 }
 
+function getStocksNameByName(name) {
+  return http.get(`/api/v1/stocks/search/${name}`);
+}
+
 function get(portfolioName='curent') {
   return http.get(`/api/v1/portfolio/${portfolioName}`);
 }
@@ -17,6 +21,7 @@ const portfolioService = {
   getAll,
   get,
   post,
+  getStocksNameByName
 };
 
 export default portfolioService;

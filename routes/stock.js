@@ -11,8 +11,16 @@ router.get('/api/v1/stocks', (req, res) => {
       else res.send(state);
     });
 });
+router.get('/api/v1/stocks/search/:symbol', (req, res) => {
+  Stock.find({ symbol: new RegExp(`.*${req.params.symbol}.*`, 'i') })
+    .exec((err, state) => {
+      if (err) res.status(500).send({ error: 'Something failed!' });
+      else if (!state || state.length === 0) res.status(404).send({ message: 'not found' });
+      else res.send(state.map((s) => s.symbol));
+    });
+});
 router.get('/api/v1/stocks/:symbol', (req, res) => {
-  Stock.find({ symbol: req.params.symbol })
+  Stock.find({ symbol: `/${req.params.symbol}/i` })
     .exec((err, state) => {
       if (err) res.status(500).send({ error: 'Something failed!' });
       else if (!state || state.length === 0) res.status(404).send({ message: 'not found' });

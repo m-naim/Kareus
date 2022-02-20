@@ -14,6 +14,7 @@ const jwtAuthrouter = require('./routes/jwtAuth.router');
 const portfolio = require('./routes/portfolio');
 const stock = require('./routes/stock');
 const predictions = require('./routes/predictions');
+const watchList = require('./routes/watchList');
 
 require('dotenv').config();
 
@@ -60,6 +61,7 @@ app.use('/state', state);
 app.use('/', portfolio);
 app.use('/', predictions);
 app.use('/', stock);
+app.use('/', watchList);
 // app.use('/', test);
 
 module.exports = app;

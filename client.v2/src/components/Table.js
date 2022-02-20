@@ -1,9 +1,11 @@
 import React from 'react';
 import data from '../mock/data';
+import { round10 } from '../utils/decimalAjustement';
 import Btn from './Btn';
 
 
 function Table({rows=data.rows,columns=data.columns}) {
+    const toPrecentille= (val)=> round10(val*100,-2)+'%'
     return (
         <div>
            <div className='flex place-content-between py-4'>
@@ -23,11 +25,30 @@ function Table({rows=data.rows,columns=data.columns}) {
             <tbody>
                 {rows.map(r =>
                     <tr className="border-collapse border-b border-gray-200 ">
-                        <td className='flex py-4 gap-2'>
-                            <button className='align-baselin bg-green-500 hover:bg-green-600  text-center text-white font-bold w-8 h-8 rounded-md focus:outline-none focus:shadow-outline'>+</button>
-                            <button className='align-baselin bg-red-500 hover:bg-red-600 text-center text-white font-bold w-8 h-8 rounded-md focus:outline-none focus:shadow-outline'>-</button>
+                        <td >
+                            <div className='flex p-2 gap-2'> 
+                                <button className='align-baselin bg-green-500 hover:bg-green-600  text-center text-white font-bold w-8 h-8 rounded-md focus:outline-none focus:shadow-outline'>+</button>
+                                <button className='align-baselin bg-red-500 hover:bg-red-600 text-center text-white font-bold w-8 h-8 rounded-md focus:outline-none focus:shadow-outline'>-</button>
+                            </div>
                         </td>
-                        {columns.map(c =><td className='py-4'>{r[c]}</td>)}
+                        <td >
+                            <div className='flex gap-2'>
+                            <p className='align-middle bg-blue-500 rounded p-1 h-8 '>{r.symbol}</p>
+                            <p>{r.name}</p>
+                            </div>
+                        </td>
+                        <td className=''>
+                            <p>{toPrecentille(r.weight)}</p>
+                        </td>
+                        <td className=''>
+                            <p>{r.qty}</p>
+                        </td>
+                        <td className=''>
+                            <p>{ round10(r.value,-2)}</p>
+                        </td>
+                        <td className=''>
+                            <p>{round10(r.bpe,-2)}</p>
+                        </td>
                     </tr>
                 )}
             </tbody>
