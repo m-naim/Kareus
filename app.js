@@ -14,7 +14,7 @@ const jwtAuthrouter = require('./routes/jwtAuth.router');
 const portfolio = require('./routes/portfolio');
 const stock = require('./routes/stock');
 const predictions = require('./routes/predictions');
-const watchList = require('./routes/watchList');
+const watchList = require('./routes/watchlist');
 
 require('dotenv').config();
 
