@@ -7,7 +7,7 @@ import Btn from './Btn';
 function Table({rows=data.rows,columns=data.columns}) {
     const toPrecentille= (val)=> round10(val*100,-2)+'%'
     return (
-        <div>
+        <div >
            <div className='flex place-content-between py-4'>
                 <p className='text-lg'>{rows.length} éléments</p>
                 <div className='flex gap-8'>
@@ -32,13 +32,13 @@ function Table({rows=data.rows,columns=data.columns}) {
                             </div>
                         </td>
                         <td >
-                            <div className='flex gap-2'>
-                            <p className='align-middle bg-blue-500 rounded p-1 h-8 '>{r.symbol}</p>
+                            <div className='flex flex-col'>
                             <p>{r.name}</p>
+                            <p className='text-xs align-middle text-blue-500 rounded p-1 w-fit '>{r.symbol}</p>
                             </div>
                         </td>
                         <td className=''>
-                            <p>{toPrecentille(r.weight)}</p>
+                            <p className='font-semibold'>{toPrecentille(r.weight)}</p>
                         </td>
                         <td className=''>
                             <p>{r.qty}</p>

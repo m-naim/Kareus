@@ -16,9 +16,9 @@ Chart.register(...registerables)
 
 function App() {
   return (
-    <div className="h-screen">
+    <div className='w-full overflow-hidden m-0 p-0' >
       <Nav/>
-      <Routes>
+      <Routes >
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/portfolios" element={<PortfoliosList />} />

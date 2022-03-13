@@ -41,7 +41,7 @@ function WatchListView(props) {
                     <iframe 
                         title='graph'
                         className='shadow-xl m-3'
-                        style={{width:700,height:500}}
+                        style={{width:750,height:500}}
                         src={`https://www.gurufocus.com/modules/chart/term/gf_value.php?symbol=${mapSelected(selected)}`}
                     />
             </div>

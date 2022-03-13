@@ -45,7 +45,7 @@ function WatchedStocksTable({ selectStock, rows={}  , columns = watchList.column
                 <tbody>
                     {list.map(r =>
                         <tr onClick={() => selectStock(r['symbol'])} className="border-collapse border-b border-gray-200 ">
-                            {watchList.columns.map(c => <td className='py-4'>{r[c]}</td>)}
+                            {watchList.columns.map(c => <td className='p-1'>{r[c]}</td>)}
                         </tr>
                     )}
                 </tbody>
