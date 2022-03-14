@@ -9,41 +9,22 @@ module.exports = {
       keyframes: {
         moveup: {
           '0%': {
-            transform: 'translateY(0px)'
+            content: 'hello',
            },
-           '35%': {
-            transform: 'translateY(-50px)'
-           },
-          '70%': {
-            transform: 'translateY(100px)'
-           },
-
-            '100%': {
-              transform: 'translateY(0px)'
+          '100%': {
+              content: 'world',
             },
 
         },
-        movedown: {
-          '0%': {
-            transform: 'translateY(0px)'
-           },
-           '35%': {
-            transform: 'translateY(-50px)'
-           },
-          '70%': {
-            transform: 'translateY(100px)'
-           },
-
-            '100%': {
-              transform: 'translateY(0px)'
-            },
-
+        backgroundImage: {
+          'hero-pattern': "url('https://media.istockphoto.com/vectors/vector-finance-pattern-finance-seamless-background-vector-id943758512')",
+          'start': "url('https://mdn.mozillademos.org/files/11983/starsolid.gif')"
         }
+ 
     },
     animation: {
-        moveup: 'moveup 3s ease-in-out infinite',
-        movedown: 'movedown 3s ease-in-out infinite',
-    }
+        moveup: 'moveup 3s ease-in-out infinite alternate',
+      }
     },
   },
   plugins: [],

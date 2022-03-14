@@ -81,7 +81,7 @@ function Performance(props) {
 
     return(
         <div className='w-full flex flex-col items-center'> 
-            <div className='md:w-2/3'>
+            <div className='w-full lg:w-2/3'>
                 <Line 
                 id={'perf'}
                 data={

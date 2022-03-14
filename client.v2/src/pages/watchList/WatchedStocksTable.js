@@ -1,6 +1,5 @@
 import { React, useState,useEffect} from 'react';
 import watchList from '../../mock/watchList';
-import Btn from '../../components/Btn'
 import Autocomplite from '../../components/Autocomplite';
 import portfolioService from '../../services/portfolioService';
 import watchListService from '../../services/watchListService';
@@ -33,7 +32,7 @@ function WatchedStocksTable({ selectStock, rows={}  , columns = watchList.column
                 <div className='flex gap-8'>
                     <button className='text-sky-500 hover:text-white hover:bg-sky-600 text-white font-bold py-1 px-8 rounded-full focus:outline-none focus:shadow-outline'>Trier</button>
                     <Autocomplite value={value} setValue={setValue} options={options} fetchData={fetchData} />
-                    <Btn onClick={()=>addClick()}>+ Ajouter</Btn>
+                    <button className='btn-primary' onClick={()=>addClick()}>+ Ajouter</button>
                 </div>
             </div>
             <table class="table-auto w-full">

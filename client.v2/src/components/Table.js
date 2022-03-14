@@ -1,7 +1,6 @@
 import React from 'react';
 import data from '../mock/data';
 import { round10 } from '../utils/decimalAjustement';
-import Btn from './Btn';
 
 
 function Table({rows=data.rows,columns=data.columns}) {
@@ -12,7 +11,7 @@ function Table({rows=data.rows,columns=data.columns}) {
                 <p className='text-lg'>{rows.length} éléments</p>
                 <div className='flex gap-8'>
                     <button className='text-sky-500 hover:text-white hover:bg-sky-600 text-white font-bold py-1 px-8 rounded-full focus:outline-none focus:shadow-outline'>Trier</button>
-                    <Btn>+ Ajouter</Btn>
+                    <button className='btn-primary' >+ Ajouter</button>
                 </div>
             </div> 
         <table class="table-auto w-full">

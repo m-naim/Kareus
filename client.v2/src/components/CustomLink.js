@@ -6,7 +6,7 @@ function CustomLink({ children, to, ...props }) {
     let resolved = useResolvedPath(toPath);
     let match = useMatch(resolved.pathname);
     let matchUri = useMatch(`${resolved.pathname.split('/')[1]}/*`);
-    let linkClassName = 'break-normal text-xl text-gray-700 hover:text-gray-900 px-10 py-4'
+    let linkClassName = 'break-normal text-xl text-gray-700 hover:text-gray-900 px-10 py-4 whitespace-nowrap'
     let activeStyle = ' border-b-4 border-sky-700 '
 
     console.log(resolved.pathname);

@@ -20,7 +20,7 @@ function PortfolioView({ children, to, ...props }) {
                     <button className='shadow-md text-gray-500  hover:bg-gray-100 text-white py-1 px-4 rounded-xl border focus:outline-none focus:shadow-outline'>Partager</button>
                 </div>
             </div>
-            <div className='flex w-full py-2 pl-20 gap-5 justify-center border-b-2 border-gray-300 overflow-auto'>
+            <div className='flex w-full py-2 pl-20 gap-8 border-b-2 border-gray-300 overflow-auto'>
                     <DeepLink to={`/Portfolios/${name}/allocation`}>Allocation</DeepLink>
                     <DeepLink to={`/portfolios/${name}/preformance`}>Preformance</DeepLink>
                     <DeepLink to={`/portfolios/${name}/pies`}>Pies</DeepLink>

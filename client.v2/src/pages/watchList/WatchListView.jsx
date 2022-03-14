@@ -1,5 +1,4 @@
 import {React,useState,useEffect} from 'react';
-import Btn from '../../components/Btn';
 import Modal from '../../components/Modal';
 import Selectable from '../../components/Selectable';
 import useModal from '../../hooks/UseModal';
@@ -28,20 +27,19 @@ function WatchListView(props) {
     }
     return (
         <div>
-            <div className='flex w-fill flex-row justify-evenly mx-40 p-6'>
+            <div className='h-24 flex w-full flex-row justify-evenly p-6 overflow-auto'>
                 <div className='flex w-fill flex-row gap-5'>
                     {list.map(w=><Selectable selected={selectedList==w} onClick={()=>setSelectedList(w)} >{w.name} </Selectable>)}
                 </div>
-                <Btn onClick={toggle}>+ Ajoute une Liste</Btn>
+                <button className='btn-primary w-48 whitespace-nowrap' onClick={toggle}>+ Ajoute une Liste</button>
                 <Modal isShowing={isShowing} hide={()=>toggle()}/>
             </div>
 
-            <div className='flex w-fill flex-row justify-evenly mx-40'>
+            <div className='flex flex-col-reverse  w-fill md:flex-row justify-evenly p-6 gap-10'>
                     <WatchedStocksTable rows={selectedList}  className='m-3' selectStock={ (stock)=>{ setSelected(stock); }} />
                     <iframe 
                         title='graph'
-                        className='shadow-xl m-3'
-                        style={{width:750,height:500}}
+                        className='shadow-xl m-3 h-[32rem] w-[52rem]'
                         src={`https://www.gurufocus.com/modules/chart/term/gf_value.php?symbol=${mapSelected(selected)}`}
                     />
             </div>

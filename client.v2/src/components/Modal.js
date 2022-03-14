@@ -2,7 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 import ReactDOM from 'react-dom';
 import watchListService from '../services/watchListService';
-import Btn from './Btn';
 import Input from './Input';
 
 const Modal = ({ isShowing, hide }) => {
@@ -32,8 +31,8 @@ const Modal = ({ isShowing, hide }) => {
               <Input type={'text'} value={value} onChange={(e)=> setValue(e.currentTarget.value)} />
             </div>
             <div className='flex flex-row gap-6'>
-            <Btn onClick={hide} >Annuler</Btn>
-            <Btn onClick={addWatchlist} >Ajouter</Btn> 
+            <button className='btn-primary' onClick={hide} >Annuler</button>
+            <button className='btn-primary' onClick={addWatchlist} >Ajouter</button> 
   
             </div>
   

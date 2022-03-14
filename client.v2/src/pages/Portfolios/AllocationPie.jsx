@@ -23,7 +23,7 @@ const chartOptions = {
     },
     legend: {
       display: true,
-      position: "right",
+      position: "bottom",
       align: "center",
       fontFamily: "Allianz-Neo",
       textDirection: 'ltr',
