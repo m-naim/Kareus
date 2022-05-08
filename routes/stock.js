@@ -36,4 +36,13 @@ router.get('/api/v1/stocks/contains/:symbol', (req, res) => {
     });
 });
 
+router.get('/api/v1/index/perfs/:symbol', (req, res) => {
+  Stock.find({ symbol: { $regex: `.*${req.params.symbol}.*`, $options: 'i' } })
+    .exec((err, state) => {
+      if (err) res.status(500).send({ error: 'Something failed!' });
+      else if (!state || state.length === 0) res.status(404).send({ message: 'not found' });
+      else res.send(state);
+    });
+});
+
 module.exports = router;

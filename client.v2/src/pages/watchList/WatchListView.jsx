@@ -19,12 +19,7 @@ function WatchListView(props) {
     useEffect(() => {
         fetchData();
     },[]);
-    const mapSelected=(value)=>{
-        if(value.includes('.PA')){
-            return 'XPAR:'+value.replace('.PA','');
-        }
-        return value;
-    }
+   
     return (
         <div>
             <div className='h-24 flex w-full flex-row justify-evenly p-6 overflow-auto'>
@@ -37,11 +32,6 @@ function WatchListView(props) {
 
             <div className='flex flex-col-reverse  w-fill md:flex-row justify-evenly p-6 gap-10'>
                     <WatchedStocksTable rows={selectedList}  className='m-3' selectStock={ (stock)=>{ setSelected(stock); }} />
-                    <iframe 
-                        title='graph'
-                        className='shadow-xl m-3 h-[32rem] w-[52rem]'
-                        src={`https://www.gurufocus.com/modules/chart/term/gf_value.php?symbol=${mapSelected(selected)}`}
-                    />
             </div>
         </div>
     );

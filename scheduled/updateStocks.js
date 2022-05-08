@@ -1,9 +1,9 @@
 const cron = require('node-cron');
-const { spawn } = require('child_process');
+// const { spawn } = require('child_process');
 
-const job = cron.schedule('0 * * * *', () => {
-  console.log('running a task every hour');
-  let dataToSend;
+const job = cron.schedule('5 * * * *', () => {
+  console.log('pyapi wake up:');
+  // let dataToSend;
   // spawn new child process to call the python script
   // const python = spawn('python', ['python_scripts/update_last.py']);
   // collect data from script

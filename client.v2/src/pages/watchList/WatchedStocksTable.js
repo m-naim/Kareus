@@ -25,6 +25,14 @@ function WatchedStocksTable({ selectStock, rows={}  , columns = watchList.column
         watchListService.addStock({name:rows.name,stocks:newList});
         console.log(list);
     }
+
+    const mapSelected=(value)=>{
+        if(value.includes('.PA')){
+            return 'XPAR:'+value.replace('.PA','');
+        }
+        return value;
+    }
+    
     return (
         <div className='w-full'>
             <div className='flex place-content-between py-4'>
@@ -45,8 +53,10 @@ function WatchedStocksTable({ selectStock, rows={}  , columns = watchList.column
                     {list.map(r =>
                         <tr onClick={() => selectStock(r['symbol'])} className="border-collapse border-b border-gray-200 ">
                             {watchList.columns.map(c => <td className='p-1'>{r[c]}</td>)}
+                            <td><a href={`https://www.gurufocus.com/term/gf_value/${mapSelected(r['symbol'])}/`} target="_blank" rel="noreferrer" >GF</a></td>
                         </tr>
                     )}
+                   
                 </tbody>
             </table>
         </div>

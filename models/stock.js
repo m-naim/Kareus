@@ -1,4 +1,3 @@
-const { Number } = require('mongoose');
 const mongoose = require('mongoose');
 
 const stockSchema = new mongoose.Schema(
@@ -7,7 +6,12 @@ const stockSchema = new mongoose.Schema(
     name: String,
     symbol: String,
     last: Number,
-    history: [],
+    peg: Number,
+    country: String,
+    currency: String,
+    industry: String,
+    sector: String,
+    last_update: Date,
   },
 );
 

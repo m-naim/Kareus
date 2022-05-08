@@ -10,17 +10,20 @@ function Nav(props) {
     const close = () => setPopover(false);
     return (
         <nav className='px-6 box-border flex place-content-between items-center shadow-md overflow-hidden'>
-            <div className='p-4 flex gap-4'>
-                <Link className='text-3xl font-large font-bold text-sky-600 hover:text-sky-900' to="/">Karius<span className='text-sm text-sky-900 font-bold '>.démo</span></Link>
-            </div>
+            <div className='flex lg:px-10'>
+        
+                <div className='p-2 flex gap-2'>
+                    <Link className='text-3xl font-large font-bold text-sky-600 hover:text-sky-900' to="/">Karius<span className='text-sm text-sky-900 font-bold '>.démo</span></Link>
+                </div>
 
-            <div className='justify-center items-center gap-2 hidden md:flex'>
-                <CustomLink to="/portfolios">Portfolios</CustomLink>
-                <CustomLink to="/predictions">IA Predictions</CustomLink>
-                <CustomLink to="/watchLists">WatchLists</CustomLink>
+                <div className='flex gap-4 justify-center items-center hidden md:flex'>
+                    <CustomLink to="/portfolios">Portfolios</CustomLink>
+                    <CustomLink to="/predictions">IA Predictions</CustomLink>
+                    <CustomLink to="/watchLists">WatchLists</CustomLink>
+                </div>
             </div>
             <div>
-                <button className='btn-primary hidden md:block'>
+                <button className='btn-primary hidden md:block lg:mx-10'>
                     <Link  to="/login">login</Link>
                 </button>
                     <div class="-mr-2 flex items-center md:hidden">

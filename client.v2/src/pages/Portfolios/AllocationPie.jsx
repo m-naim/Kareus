@@ -87,8 +87,10 @@ function AllocationPie({ adata }) {
   },[]);
 
   return (
-    <div style={{ width: "440px", height: "500px",padding:'10px' }}>
-      <Doughnut data={display} options={chartOptions} />
+    <div className='w-full flex place-content-center'>
+      <div className='w-full lg:w-1/3'>
+        <Doughnut data={display} options={chartOptions} />
+      </div>
     </div>
   ) ;
 }

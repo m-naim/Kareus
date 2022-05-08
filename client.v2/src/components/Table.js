@@ -32,7 +32,7 @@ function Table({rows=data.rows,columns=data.columns}) {
                         </td>
                         <td >
                             <div className='flex flex-col'>
-                            <p>{r.name}</p>
+                            <p>{r.asset.name}</p>
                             <p className='text-xs align-middle text-blue-500 rounded p-1 w-fit '>{r.symbol}</p>
                             </div>
                         </td>
@@ -43,10 +43,10 @@ function Table({rows=data.rows,columns=data.columns}) {
                             <p>{r.qty}</p>
                         </td>
                         <td className=''>
-                            <p>{ round10(r.value,-2)}</p>
+                            <p>{ round10(r.asset.last,-2)}</p>
                         </td>
                         <td className=''>
-                            <p>{round10(r.bpe,-2)}</p>
+                            <p>{round10(r.bep,-2)}</p>
                         </td>
                     </tr>
                 )}

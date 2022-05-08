@@ -11,6 +11,7 @@ import PortfolioView from './pages/Portfolios/PortfolioView';
 import WatchListView from './pages/watchList/WatchListView';
 import Performance from './pages/Portfolios/Performance';
 import { Chart, registerables  } from 'chart.js'
+import 'chartjs-adapter-date-fns';
 
 Chart.register(...registerables)
 

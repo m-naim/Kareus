@@ -12,9 +12,10 @@ function AllocationView(props) {
         console.log(name);
         try{
             const data = await portfolioService.get(name);
+            console.log(data);
             data.allocation= data.allocation.map((item, i) => {
                 item.id = i + 1;
-                return {...item, ...item.asset}
+                return item;
             });
 
             data.transactions.forEach((item, i) => {
