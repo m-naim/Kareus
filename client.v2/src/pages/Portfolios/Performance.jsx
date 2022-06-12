@@ -4,6 +4,7 @@ import portfolioService from '../../services/portfolioService';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 import { round10 } from 'utils/decimalAjustement';
+import MultiSelect from 'components/MultiSelect';
 
 
 const chartDataInit = {
@@ -46,6 +47,8 @@ const chartOptions = {
 let perfsData = {};
 let datesInit = [];
 
+let benchmarksPerfs=[]
+
 function Performance(props) {
 
     const { name } = useParams();
@@ -55,6 +58,7 @@ function Performance(props) {
     const [caCperfs, setCaCperfs] = useState(chartDataInit.datasets[0].data);
     const [snpPerfs, setSnpPerfs] = useState(chartDataInit.datasets[0].data);
 
+    const [period, setPeriod] = useState('ALL');
     const fetchData = async () => {
         try {
             const data = await portfolioService.get(name);
@@ -87,7 +91,6 @@ function Performance(props) {
                     return (x - 1) * 100;
                 }
             );
-            console.log(perfsCAC);
             return perfsCAC;
 
     };
@@ -96,31 +99,49 @@ function Performance(props) {
     useEffect(() => {
         fetchData();
         fetchIndex("FCHI").then(
-            res=> setCaCperfs(res)
+            res=> {
+                setCaCperfs(res)
+                benchmarksPerfs.push({name:'FCHI',perfs:res});
+            }
         )
         fetchIndex("GSPC").then(
-            res=> setSnpPerfs(res)
+            res=> {
+                setSnpPerfs(res)
+                benchmarksPerfs.push({name:'GSPC',perfs:res});
+            }
         )
-
     }, []);
 
     const handlePeriodClick = (period) => {
+        setPeriod(period);
+        const fchiperfs=benchmarksPerfs.find((e) => e.name === 'FCHI').perfs
+        const gsccPerfs=benchmarksPerfs.find((e) => e.name === 'GSPC').perfs
         switch (period) {
-            case 0:
+            case 'ALL':
                 setDates(datesInit);
                 setPerfs(perfsData.cum_All.map(x => (x - 1) * 100));
+                
+                setCaCperfs(fchiperfs.slice(-datesInit.length).map(x => x-fchiperfs[fchiperfs.length-datesInit.length]))
+                setSnpPerfs(gsccPerfs.slice(-datesInit.length).map(x => x-gsccPerfs[gsccPerfs.length-datesInit.length]))
                 break;
-            case -30:
-                setDates(datesInit.slice(period));
-                setPerfs(perfsData.cum_1M.slice(period).map(x => (x - 1) * 100));
+            case '1M':
+                setDates(datesInit.slice(-30));
+                setPerfs(perfsData.cum_1M.slice(-30).map(x => (x - 1) * 100));
+                console.log(benchmarksPerfs);
+                setCaCperfs(fchiperfs.slice(-30).map(x => x-fchiperfs[fchiperfs.length-30]))
+                setSnpPerfs(gsccPerfs.slice(-30).map(x => x-gsccPerfs[gsccPerfs.length-30]))
                 break;
-            case -180:
-                setDates(datesInit.slice(period));
-                setPerfs(perfsData.cum_6M.slice(period).map(x => (x - 1) * 100));
+            case '6M':
+                setDates(datesInit.slice(-180));
+                setPerfs(perfsData.cum_6M.slice(-180).map(x => (x - 1) * 100));
+                setCaCperfs(fchiperfs.slice(-180).map(x => x-fchiperfs[fchiperfs.length-180]))
+                setSnpPerfs(gsccPerfs.slice(-180).map(x => x-gsccPerfs[gsccPerfs.length-180]))
                 break;
-            case -365:
-                setDates(datesInit.slice(period));
-                setPerfs(perfsData.cum_1Y.slice(period).map(x => (x - 1) * 100));
+            case '1Y':
+                setDates(datesInit.slice(-365));
+                setPerfs(perfsData.cum_1Y.slice(-365).map(x => (x - 1) * 100));
+                setCaCperfs(fchiperfs.slice(-365).map(x => x-fchiperfs[fchiperfs.length-365]))
+                setSnpPerfs(gsccPerfs.slice(-365).map(x => x-gsccPerfs[gsccPerfs.length-180]))
                 break;
             default:
                 break;
@@ -166,10 +187,7 @@ function Performance(props) {
 
                 </div>
                 <div className='flex gap-6'>
-                    <button onClick={() => handlePeriodClick(-30)}>1M</button>
-                    <button onClick={() => handlePeriodClick(-180)}>6M</button>
-                    <button onClick={() => handlePeriodClick(-365)}>1Y</button>
-                    <button onClick={() => handlePeriodClick(0)}>ALL</button>
+                    <MultiSelect list={['1M','6M','1Y','ALL']} active={period} select={handlePeriodClick} />
                 </div>
             </div>
             <div className='w-1/2 min-w-[10em] m-10'>

@@ -1,5 +1,4 @@
 import React from 'react';
-import Input from '../../components/Input';
 import './index.css'
 import crypto1 from 'assets/img/crypto.btc.svg'
 import crypto2 from 'assets/img/crypto.eth.svg'
@@ -8,7 +7,7 @@ import stats from 'assets/img/stats.jpg'
 
 function Home(props) {
     return (
-        <div className='h-full '>
+        <div className='h-full bg-dark'>
 
             <header className="flex place-content-center w-screen gap-0 flex-col md:flex-row-reverse overflow-hidden">
 
@@ -43,10 +42,10 @@ function Home(props) {
                     </div>
 
                     <div class="mt-8 w-full">
-                        <p class="mt-18 text-left text-gray-900 md:mt-10 md:text-md md:max-w-xl md:mt-5 md:text-lg lg:mx-0">
-                            S'inscrire pour être notifié quand la bêta serais disponible</p>
+                        <h5 class="mt-18 text-left text-gray-900 md:mt-10 md:text-md md:max-w-xl md:mt-5 md:text-lg lg:mx-0">
+                            S'inscrire pour être notifié quand la bêta serais disponible</h5>
                         <div class="max-w-xl w-full mt-4 md:flex justfy-center ">
-                            <Input type="mail" name='mail' placeholder='Exemple@mail.com' />
+                            <input className='input-primary' type="mail" name='mail' placeholder='Exemple@mail.com' />
                             <div class="mt-3 md:mt-0 md:ml-3">
                                 <a href="#" class="break-normal w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-sky-700 bg-sky-100 hover:bg-sky-200 md:py-4 md:text-lg md:px-10"> S'inscrire</a>
                             </div>
@@ -56,34 +55,61 @@ function Home(props) {
 
             </header>
 
-            <section className='w-full flex flex-col md:flex-row p-8 gap-5 bg-gray-100 grid grid-cols-2'>
-                <div className='shadow-md p-12 bg-white'>
-                    <h1 className='h3 mb'>Tracker votre portfolio</h1>
-                    <p className='text-xl text-gray-600'>Suivre vos pertes et profits</p>
-                    <p className='text-xl text-gray-600'>Comparer vos performance avec un indice ou un autre portfeils</p>
-                </div>
-                <div className='shadow-md p-12 bg-white'>
-                    <h1 className='h3 mb'>Inspirez vous</h1>
-                    <p className='text-xl text-gray-600'>Recherche simple de portfeilles</p>
-                    <p className='text-xl text-gray-600'>Plien de statistiques sur les portfeilles</p>
-                </div>
-                <div className='shadow-md p-12 bg-white'>
-                    <h1 className='h3 mb'>Partagez</h1>
-                    <p className='text-xl text-gray-600'>Partager vous portfeilles avec vos amis et la comunauté</p>
-                    <p className='text-xl text-gray-600'>Comparer les performances et autres statistiques</p>
-                </div>
-                <div className='shadow-md p-12 bg-white'>
-                    <h1 className='h3 mb'>Sesie facile</h1>
-                    <p className='text-xl text-gray-600'>import votre portfeuille a partir d'un fichier excelle</p>
-                </div>
-                <div className='shadow-md p-12 bg-white'>
-                    <h1 className='h3 mb'>Alerts</h1>
-                    <p className='text-xl text-gray-600'>soiez informer en temps reil des transactions</p>
+            <section className='w-full p-8 bg-gray-100 bg-dark'>
+                    <div className='flex flex-wrap justify-center -m-4'>
+                        <div className='shadow-md p-6 bg-white md:w-1/4 w-full m-4 bg-dark'>
+                            <div className='flex gap-4 content-center items-center'>
+                                <div className='w-12 h-12 bg-sky-500 rounded-md'>i</div>
+                                <h4 className='mb'>Tracker votre portfolio</h4>
+                            </div>
+                            <p className='text-md text-gray-600'>Suivrez vos performances</p>
+                            <p className='text-md text-gray-600'>Comparer vos performances les indices et les autres portfeilles</p>
+                        </div>
+                        <div className='shadow-md p-6 bg-white md:w-1/4 w-full m-4 bg-dark'>
+                            <div className='flex gap-4 content-center items-center'>
+                                <div className='w-12 h-12 bg-sky-500 rounded-md'>i</div>
+                                <h4 className='mb'>Inspirez vous</h4>
+                            </div>
+                            <p className='text-md text-gray-600'>Recherche simple de portfeilles</p>
+                            <p className='text-md text-gray-600'>Plein de statistiques sur les portfeilles</p>
+                        </div>
+                        <div className='shadow-md p-6 bg-white md:w-1/4 w-full m-4 bg-dark'>
+                            <div className='flex gap-4 content-center items-center'>
+                                <div className='w-12 h-12 bg-sky-500 rounded-md'>i</div>
+                                <h4 className='mb'>Partagez</h4>
+                            </div>
+                            <p className='text-md text-gray-600'>Partager vous portfeilles avec vos amis et la communauté</p>
+                            <p className='text-md text-gray-600'>Comparer les performances et autres statistiques</p>
+                        </div>
+                        <div className='shadow-md p-6 bg-white md:w-1/4 w-full m-4 bg-dark'>
+                            <div className='flex gap-4 content-center items-center'>
+                                <div className='w-12 h-12 bg-sky-500 rounded-md'>i</div>
+                                <h4 className='mb'>Saisie facile</h4>
+                            </div>
+                            <p className='text-md text-gray-600'>import votre portfeuille a partir d'un fichier excel</p>
+                        </div>
+                        <div className='shadow-md p-6 bg-white md:w-1/4 w-full m-4 bg-dark'>
+                            <div className='flex gap-4 content-center items-center'>
+                                <div className='w-12 h-12 bg-sky-500 rounded-md'>i</div>
+                                <h4 className='mb'>Alertes intelligentes</h4>
+                            </div>
+                            <p className='text-md text-gray-600'>Soyez informés en temps réel des transactions des portfeulles que vos Suivez</p>
+                            <p className='text-md text-gray-600'>Notifications programmées</p>
+                        </div>
+
+                        <div className='shadow-md p-6 bg-white md:w-1/4 w-full m-4 bg-dark'>
+                            <div className='flex gap-4 content-center items-center'>
+                                <div className='w-12 h-12 bg-sky-500 rounded-md'>i</div>
+                                <h4 className='mb'>Alertes intelligentes</h4>
+                            </div>
+                            <p className='text-md text-gray-600'>Soyez informés en temps réel des transactions des portfeulles que vos Suivez</p>
+                            <p className='text-md text-gray-600'>Notifications programmées</p>
+                        </div>
                 </div>
             </section>
             <section className='w-full flex flex-col md:flex-row p-8 gap-5'>
                 {/* <img className='shadow-md' src={stats} alt="stats" /> */}
-              
+
             </section>
 
         </div>

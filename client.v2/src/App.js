@@ -12,23 +12,25 @@ import WatchListView from './pages/watchList/WatchListView';
 import Performance from './pages/Portfolios/Performance';
 import { Chart, registerables  } from 'chart.js'
 import 'chartjs-adapter-date-fns';
+import TransactionView from 'pages/Portfolios/TransactionView';
 
 Chart.register(...registerables)
 
 function App() {
   return (
-    <div className='w-full overflow-hidden m-0 p-0' >
+    <div className='w-full min-h-screen overflow-hidden m-0 p-0 bg-dark' >
       <Nav/>
       <Routes >
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/portfolios" element={<PortfoliosList />} />
+        <Route path="/explore" element={<PortfoliosList />} />
         <Route path="/portfolios/:name/" element={<PortfolioView/>} >
           <Route index element={<AllocationView />} />
           <Route path="allocation" element={<AllocationView />} />
           <Route path="Preformance" element={<Performance />} />
           <Route path="Pies" element={<AllocationPie />} />
-          <Route path="Orders" element={<AllocationView />} />
+          <Route path="Orders" element={<TransactionView />} />
         </Route>
         <Route path="/watchLists" element={<WatchListView />} />
       </Routes>

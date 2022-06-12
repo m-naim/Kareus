@@ -1,8 +1,13 @@
 import React from 'react';
 
-function Selectable({children,onClick,selected,...props}) {
-    let className="bg-gray-400 hover:bg-gray-500 text-white font-bold h-1py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline"
-    if(selected) className=className+ " border-b-4 border-sky-500"
+let defaultClasseName= "inline-block bg-gray-100 text-gray-700 font-bold px-4 rounded-md w-fit hover:shadow-md whitespace-nowrap dark:text-gray-500";
+const defaultActive= " border-b-4 border-sky-500 dark:text-gray-100";
+
+function Selectable({children,onClick,selected, classNameP=defaultClasseName,activeClass=defaultActive,...props}) {
+    let className= classNameP;
+    if(selected) className=classNameP+ activeClass;
+    console.log([selected,className]);
+
     return (
         <button 
         onClick={onClick}

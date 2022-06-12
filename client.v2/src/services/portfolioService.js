@@ -25,13 +25,40 @@ function post(state) {
   return http.post('/api/v1/portfolios/', state);
 }
 
+function add(name) {
+  const body={
+    name,
+    transactions: [],
+    cash_flow: [],
+    allocatio: [],
+    last_perfs_update: new Date()
+  }
+  return http.post('/api/v1/portfolio/', body);
+}
+
+function AddTransaction(idPft,sense,ticker,prix,qty,date) {
+  const coef="buy"===sense?1:-1;
+  const body={
+    id:idPft,
+    transaction: {
+        symbol: ticker,
+        date: date,
+        price: prix,
+        qty:qty*coef,
+    },
+  }
+  return http.put('/api/v1/transaction/portfolio', body);
+}
+
 const portfolioService = {
   getAll,
   get,
   getData,
   post,
   getStocksNameByName,
-  getStocksContains
+  getStocksContains,
+  add,
+  AddTransaction
 };
 
 export default portfolioService;

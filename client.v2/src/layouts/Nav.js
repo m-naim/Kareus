@@ -1,3 +1,4 @@
+import Toggle from 'components/ThemeToggle';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CustomLink from '../components/CustomLink';
@@ -9,33 +10,38 @@ function Nav(props) {
 
     const close = () => setPopover(false);
     return (
-        <nav className='px-6 box-border flex place-content-between items-center shadow-md overflow-hidden'>
-            <div className='flex lg:px-10'>
-        
-                <div className='p-2 flex gap-2'>
-                    <Link className='text-3xl font-large font-bold text-sky-600 hover:text-sky-900' to="/">Karius<span className='text-sm text-sky-900 font-bold '>.démo</span></Link>
+        <nav className='px-6 box-border flex place-content-between items-center shadow-md overflow-hidden dark:bg-gray-700'>
+            <div className='flex lg:px-14'>
+
+                <div className='p-4 flex gap-4'>
+                    <Link className='text-3xl font-large font-bold text-sky-600 hover:text-sky-900 dark:text-slate-100' to="/">Karius<span className='text-sm text-sky-900 font-bold dark:text-slate-100'>.démo</span></Link>
                 </div>
 
                 <div className='flex gap-4 justify-center items-center hidden md:flex'>
-                    <CustomLink to="/portfolios">Portfolios</CustomLink>
-                    <CustomLink to="/predictions">IA Predictions</CustomLink>
+                    <CustomLink to="/explore">
+                        <svg class="mr-2 w-8 h-8 text-blue-700 dark:text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                        </svg>
+                        Explorer
+                    </CustomLink>
+                    <CustomLink to="/portfolios">Mes Portefeuils/Suivis</CustomLink>
+                    {/* <CustomLink to="/predictions">IA Predictions</CustomLink> */}
                     <CustomLink to="/watchLists">WatchLists</CustomLink>
                 </div>
             </div>
-            <div>
-                <button className='btn-primary hidden md:block lg:mx-10'>
-                    <Link  to="/login">login</Link>
-                </button>
-                    <div class="-mr-2 flex items-center md:hidden">
-                        <button type="button"
-                            onClick={() => setPopover(true)}
-                            class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
-                            <span class="sr-only">Open main menu</span>
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                            </svg>
-                        </button>
-                    </div>
+            <div className='inline-flex'>
+                <Toggle/>
+                <Link className='btn-primary h-fit hidden md:block lg:mx-10' to="/login">login</Link>
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button"
+                        onClick={() => setPopover(true)}
+                        class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
 
             </div>
 

@@ -3,8 +3,8 @@ import Table from '../../components/Table';
 import { useParams } from 'react-router-dom';
 import portfolioService from '../../services/portfolioService'
 
-const columns=['symbol','weight','qty','last','bpe'] 
-function AllocationView(props) {
+const columns=['symbol','date','qty','price'] 
+function TransactionView(props) {
     const {name} = useParams();
     const [portfolio, setPortfolio] = useState({allocation:[],transactions:[]});
 
@@ -21,7 +21,7 @@ function AllocationView(props) {
             data.transactions.forEach((item, i) => {
                 item.id = i + 1;
             });
-
+            console.log(data);
             setPortfolio(data);
         }
         catch{
@@ -51,9 +51,9 @@ function AllocationView(props) {
 
     return (
         <div>
-            <Table columns={columns} rows={portfolio.allocation} addtransaction={addtransaction}/>
+            <Table columns={columns} rows={portfolio.transactions} addtransaction={addtransaction} type={'transaction'}/>
         </div>
     );
 }
 
-export default AllocationView;
+export default TransactionView;

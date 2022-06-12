@@ -1,11 +1,10 @@
 import {React} from 'react';
-import Input from './Input';
 
 function Autocomplite({value,setValue,options,fetchData}) {
    
     return (
         <div className="flex flex-col items-center">
-            <Input list="auto" id="choice" name="choice" value={value} onChange={
+            <input className='input-primary'  list="auto" id="choice" name="choice" value={value} onChange={
                 (e)=> {
                     setValue(e.currentTarget.value); 
                     fetchData();
