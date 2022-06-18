@@ -1,98 +1,138 @@
-import {React,useState,useEffect} from 'react';
+import { React, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Doughnut } from 'react-chartjs-2'
-import  palette  from 'google-palette';
+import palette from 'google-palette';
 import portfolioService from '../../services/portfolioService'
 
 
-const data = {
-  labels: [ 'a','b'],
+const defaultData = {
+  labels: ['a', 'b'],
   datasets: [
     {
-      backgroundColor: palette('tol-rainbow', 10).map((hex)=> '#'+hex),
-      data: [10.1,20],
+      backgroundColor: palette('tol-rainbow', 10).map((hex) => '#' + hex),
+      data: [10.1, 20],
     }
   ]
 };
 
-const chartOptions = {
-  responsive: true,
-  plugins: {
-    datalabels: {
-      color: '#36A2EB'
-    },
-    legend: {
-      display: true,
-      position: "bottom",
-      align: "center",
-      fontFamily: "Allianz-Neo",
-      textDirection: 'ltr',
-      labels: {
-        usePointStyle: true,
-        fontColor: "#006192",
-      }
-    },
-    title: {
-      display: true,
-      text: 'Chart.js Pie Chart'
-    },
-    tooltip: {
-      callbacks: {
-        label: function (context) {
-          const labelIndex = (context.datasetIndex * 2) + context.dataIndex;
-          return context.chart.data.labels[labelIndex] + ': ' + context.formattedValue;
-        }
-      }
+const tooltip = {
+  callbacks: {
+    label: function (context) {
+      const labelIndex = (context.datasetIndex * 2) + context.dataIndex;
+      return context.chart.data.labels[labelIndex] + ': ' + context.formattedValue + '%';
     }
   }
 }
 
 function AllocationPie({ adata }) {
-  const {name} = useParams();
-  const[display,setDisplay]=useState(data);
-  const fetchData = async () => {
-      try{
-          const result = await portfolioService.get(name);
-          result.allocation= result.allocation.map((item, i) => {
-              item.id = i + 1;
-              return {...item, ...item.asset}
-          });
+  const { name } = useParams();
+  const [actions, setActions] = useState(defaultData);
+  const [secteurs, setSecteurs] = useState(defaultData);
+  const [industries, setIndustries] = useState(defaultData);
+  const [devises, setDevises] = useState(defaultData);
+  const [loading, setLoading] = useState(true);
 
-          result.transactions.forEach((item, i) => {
-              item.id = i + 1;
-          });
-          console.log(result.allocation);
-          prepareData(result);
-          
-      }
-      catch{
-          console.log("error api");
-      }
+  const fetchData = async () => {
+    try {
+      const result = await portfolioService.get(name);
+      getDistrib(result.allocation,'name', setActions);
+      getDistrib(result.allocation, 'currency', setDevises);
+      getDistrib(result.allocation, 'sector', setSecteurs);
+      getDistrib(result.allocation, 'industry', setIndustries);
+
+      setLoading(false)
+    }
+    catch {
+      console.log("error api");
+    }
   };
 
-  
+  const getDistrib = (allocation, selctor, setState) => {
 
-  const prepareData= (pfData)=> {
-    const {allocation}= pfData;
+    var fruits = allocation.reduce((fruitsCount, current) => {
+      const index = fruitsCount.findIndex((elm) => elm.name === current.asset[selctor]);
+      if (index >= 0) {
+        fruitsCount[index].weight += current.weight;
+        return fruitsCount;
+      } else {
+        fruitsCount.push({ weight: current.weight, name: current.asset[selctor] });
+        return fruitsCount;
+      }
+    }, [])
+
+    prepareData(fruits, setState);
+  }
+
+  const prepareData = (allocation, setter) => {
+    let data = {
+      labels: [], 
+      datasets: [
+        {
+          backgroundColor: '',
+          data: [],
+        }
+      ]
+    };
+
+    console.log(allocation);
     data.labels = allocation.map(s => s.name)
     data.datasets[0].data = allocation.map(s => s.weight * 100)
-    data.datasets[0].backgroundColor=palette('tol-rainbow', allocation.length).map(function(hex) {
+    data.datasets[0].backgroundColor = palette('tol-rainbow', allocation.length).map(function (hex) {
       return '#' + hex;
     })
-    setDisplay(data);
+    setter(data);
   };
 
   useEffect(() => {
     fetchData();
-  },[]);
+  }, []);
 
-  return (
-    <div className='w-full flex place-content-center'>
-      <div className='w-full lg:w-1/3'>
-        <Doughnut data={display} options={chartOptions} />
-      </div>
-    </div>
-  ) ;
+  const getDisplay = (type) => {
+
+    if (type === 'Actions')
+      return actions;
+    if (type === 'Secteurs')
+      return secteurs;
+    if (type === 'Industries')
+      return industries;
+    if (type === 'Devises')
+      return devises;
+    return ""
+  }
+
+
+  return loading ? <div>wait</div> :
+    <div className='w-full gap-4 flex flex-wrap place-content-around p-4  '>
+      {['Actions', 'Secteurs', 'Industries', 'Devises'].map(type => {
+        return (
+          <div className='w-full lg:w-1/3 shadow rounded-md p-4 max-w-[20em]' >
+            <Doughnut
+              data={{
+                labels: getDisplay(type).labels,
+                datasets: getDisplay(type).datasets
+              }}
+              options={{
+                responsive: true,
+                plugins: {
+                  datalabels: {
+                    color: '#36A2EB'
+                  },
+                  legend: {
+                    display: false,
+                  },
+                  title: {
+                    display: true,
+                    text: type
+                  },
+                  tooltip
+                }
+              }} />
+          </div>)
+      }
+      )
+      }
+    </div >
+    ;
 }
 
 export default AllocationPie;

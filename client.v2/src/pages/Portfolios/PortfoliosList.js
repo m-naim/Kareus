@@ -30,9 +30,9 @@ function PortfoliosList(props) {
     }
 
     return (
-        <div className='flex flex-col justify-center items-center bg-dark'>
+        <div className='flex flex-col justify-center items-center bg-dark p-4'>
 
-            <div className="w-full w-2/3 p-2 m-2  text-sm font-medium text-center text-gray-500 border-b border-gray-200 ">
+            <div className="w-full lg:w-2/3 p-2 m-2  text-sm font-medium text-center text-gray-500 border-b border-gray-200 ">
                 <ul class="flex flex-wrap -mb-px">
                     <li class="mr-4 text-xl">
                         Mes portfeuilles
@@ -43,14 +43,14 @@ function PortfoliosList(props) {
                 </ul>
             </div>
 
-            <section className='flex w-2/3 p-2 m-2 place-content-between'>
+            <section className='flex w-full lg:w-2/3 m-2 place-content-between'>
                 <p className='text-2xl justify-start text-sky-700'>Portfolios</p>
                 <button className='btn-primary w-32' onClick={toggle}>+ Ajouter</button>
             </section>
                 <Modal isShowing={isShowing} hide={()=>toggle()}>
                     <AddPortfolio hide={()=>toggle()} addClick={addClick}/>
                 </Modal>
-            <div className='flex w-2/3 flex-col'>
+            <div className='flex w-full lg:w-2/3 flex-col'>
                 <div className='grid grid-cols-4 w-full place-content-between px-12 rounded-3xl '>
                     <p>Name</p>
                     <p className='text-gray-500'>Value</p>

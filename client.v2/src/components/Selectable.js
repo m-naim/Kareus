@@ -6,7 +6,6 @@ const defaultActive= " border-b-4 border-sky-500 dark:text-gray-100";
 function Selectable({children,onClick,selected, classNameP=defaultClasseName,activeClass=defaultActive,...props}) {
     let className= classNameP;
     if(selected) className=classNameP+ activeClass;
-    console.log([selected,className]);
 
     return (
         <button 

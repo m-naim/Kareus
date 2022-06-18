@@ -20,10 +20,8 @@ function PortfolioPage(props) {
     let {name}= useParams();
 
     const fetchData = async () => {
-        console.log(name);
         try{
             const data = await portfolioService.get(name);
-            console.log(data);
             data.allocation.forEach((item, i) => {
                 item.id = i + 1;
             });

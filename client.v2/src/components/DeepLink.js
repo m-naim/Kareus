@@ -9,8 +9,6 @@ function DeepLink({ children, to, ...props }) {
     let linkClassName = 'inline-block p-4 rounded-t-lg text-xl text-gray-600 hover:text-gray-900 dark:hover:bg-gray-700 dark:text-gray-300 '
     let activeStyle = 'border-b-4 border-blue-700 dark:text-gray-100 dark:border-blue-500'
 
-    console.log(resolved.pathname);
-    console.log(resolved.pathname.split('/'));
     return (
       <div>
         <Link

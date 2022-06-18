@@ -10,7 +10,6 @@ function AddTransaction({ hide, addClick, symbol }) {
     const [prix, setPrix] = useState(0);
     const [sense, setSense] = useState("buy");
 
-    console.log(date);
     return (
         <div className=" md:w-auto shadow-xl relative flex gap-6 flex-col  justify-center items-center bg-white py-8 px-12 rounded-md bg-dark ">
             <div class="flex gap-4 flex-col ">

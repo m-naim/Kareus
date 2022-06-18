@@ -15,5 +15,4 @@ const config = {
   },
 };
 export const env = process.env.NODE_ENV || 'dev';
-console.log(env);
 export default config[env];

@@ -7,23 +7,19 @@ import watchListService from '../../services/watchListService';
 
 function WatchedStocksTable({ selectStock, rows={}  , columns = watchList.columns }) {
     rows.stocks = rows.stocks === undefined?[]:rows.stocks
-    console.log(rows.stocks );
     const [value, setValue] = useState('');
     const [options, setOptions] = useState([]);
     const [list, setList] = useState([]);
 
     const fetchData = async () => {
         const response = await portfolioService.getStocksNameByName(value);
-        console.log(response);
         setOptions(response);
     };
     useEffect(() => {setList(rows.stocks)}, [rows])
     const addClick = () => { 
-        console.log("add");
         const newList = [...list, { symbol: value }]
         setList(newList) 
         watchListService.addStock({name:rows.name,stocks:newList});
-        console.log(list);
     }
 
     const mapSelected=(value)=>{

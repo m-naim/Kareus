@@ -10,7 +10,6 @@ function PortfolioView({ children, to, ...props }) {
     const [pftData, setPftData] = useState([]);
     const fetchData = async () => {
         const response = await portfolioService.getData(name);
-        console.log(response);
         setPftData(response);
     };
     useLayoutEffect(() => {

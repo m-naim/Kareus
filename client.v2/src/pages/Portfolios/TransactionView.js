@@ -9,7 +9,6 @@ function TransactionView(props) {
     const [portfolio, setPortfolio] = useState({allocation:[],transactions:[]});
 
     const fetchData = async () => {
-        console.log(name);
         try{
             const data = await portfolioService.get(name);
 
@@ -21,7 +20,6 @@ function TransactionView(props) {
             data.transactions.forEach((item, i) => {
                 item.id = i + 1;
             });
-            console.log(data);
             setPortfolio(data);
         }
         catch{
