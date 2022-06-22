@@ -36,7 +36,7 @@ function AddPortfolio({ hide, addClick }) {
                 </div>
 
             </div>
-            <button className='btn-primary w-full' onClick={() => addClick(value)} >Ajouter</button>
+            <button className='btn-primary w-full' onClick={() => addClick({value,name,visibility})} >Ajouter</button>
         </div>
     );
 }

@@ -25,11 +25,18 @@ function post(state) {
   return http.post('/api/v1/portfolios/', state);
 }
 
-function add(name) {
+function add(payload) {
   const body={
-    name,
+    name:payload.name,
+    visibility:payload.visibility,
     transactions: [],
-    cash_flow: [],
+    cash_flow: [
+      {
+        action:'deposit',
+        amount:payload.value,
+        date: new Date(),
+      }
+    ],
     allocatio: [],
     last_perfs_update: new Date()
   }

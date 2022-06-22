@@ -17,10 +17,11 @@ function PortfoliosList(props) {
         fetchData();
     }, []);
 
-    const addClick =async (name) => {  
-        if(name==="") return
+    const addClick =async (payload) => {  
+        if(payload.name==="") return
+        if(payload.value<0) return
         try{
-            await portfolioService.add(name);
+            await portfolioService.add(payload);
             fetchData();
             toggle();
         }
