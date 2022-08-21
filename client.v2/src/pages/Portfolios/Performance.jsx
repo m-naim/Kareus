@@ -51,7 +51,8 @@ let benchmarksPerfs = []
 
 function Performance(props) {
 
-    const { name } = useParams();
+    const { id } = useParams();
+    const [name, setName] = useState("");
     const [dates, setDates] = useState(chartDataInit.labels);
     const [perfs, setPerfs] = useState(chartDataInit.datasets[0].data);
 
@@ -63,8 +64,9 @@ function Performance(props) {
 
     const fetchData = async () => {
         try {
-            const data = await portfolioService.get(name);
+            const data = await portfolioService.get(id);
             datesInit = data.perfs.date;
+            setName(data.name);
             setDates(datesInit)
             perfsData = data.perfs;
             setPerfs(perfsData.cum_All.map(x => (x - 1) * 100));

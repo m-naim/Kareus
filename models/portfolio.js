@@ -40,6 +40,7 @@ const portfolioSchema = new mongoose.Schema(
       sum: [],
       date: [],
     },
+    public: Boolean,
   },
 );
 

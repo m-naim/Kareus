@@ -25,8 +25,8 @@ function getData(portfolioName='curent') {
   return http.get(`/api/v1/data/portfolio/${portfolioName}`);
 }
 
-function follow(name) {
-  return http.put(`/api/v1/portfolio/follow/${name}`);
+function follow(id) {
+  return http.put(`/api/v1/portfolio/follow/${id}`);
 }
 
 function post(state) {
@@ -36,7 +36,7 @@ function post(state) {
 function add(payload) {
   const body={
     name:payload.name,
-    visibility:payload.visibility,
+    public:payload.visibility==='public'?true:false,
     transactions: [],
     cash_flow: [
       {
@@ -65,8 +65,8 @@ function AddTransaction(idPft,sense,ticker,prix,qty,date) {
   return http.put('/api/v1/transaction/portfolio', body);
 }
 
-function deletePortfolio(name) {
-  return http.deleteReq(`/api/v1/portfolio/delete/${name}`);
+function deletePortfolio(id) {
+  return http.deleteReq(`/api/v1/portfolio/delete/${id}`);
 }
 
 const portfolioService = {

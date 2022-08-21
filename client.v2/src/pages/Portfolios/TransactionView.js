@@ -5,12 +5,12 @@ import portfolioService from '../../services/portfolioService'
 
 const columns=['symbol','date','qty','price'] 
 function TransactionView(props) {
-    const {name} = useParams();
+    const {id} = useParams();
     const [portfolio, setPortfolio] = useState({allocation:[],transactions:[]});
 
     const fetchData = async () => {
         try{
-            const data = await portfolioService.get(name);
+            const data = await portfolioService.get(id);
 
             data.allocation= data.allocation.map((item, i) => {
                 item.id = i + 1;

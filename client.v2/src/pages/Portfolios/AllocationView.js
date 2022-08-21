@@ -6,14 +6,14 @@ import authService from 'services/authService';
 
 const columns=['symbol','weight','qty','last','bpe'] 
 function AllocationView(props) {
-    const {name} = useParams();
+    const {id} = useParams();
     const [portfolio, setPortfolio] = useState({allocation:[],transactions:[]});
     const [editable, setEditable] = useState(false);
 
     const fetchData = async () => {
-        console.log(name);
+        console.log(id);
         try{
-            const data = await portfolioService.get(name);
+            const data = await portfolioService.get(id);
             const userId= authService.getCurrentUser().user.id;
 
             data.allocation= data.allocation.map((item, i) => {

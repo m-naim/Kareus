@@ -6,13 +6,13 @@ import DeepLink from '../../components/DeepLink';
 import { round10 } from '../../utils/decimalAjustement';
 
 function PortfolioView({ children, to, ...props }) {
-    const { name } = useParams();
+    const { id } = useParams();
     const [followed, setFollowed] = useState(false);
     const [editable, setEditable] = useState(false);
     const [pftData, setPftData] = useState([]);
 
     const fetchData = async () => {
-        const response = await portfolioService.getData(name);
+        const response = await portfolioService.getData(id);
         const userId= authService.getCurrentUser().user.id;
         if(response.followers.includes(userId)) setFollowed(true);
         if(response.owner===userId) setEditable(true);
@@ -25,7 +25,7 @@ function PortfolioView({ children, to, ...props }) {
     const follow= async ()=>{
         try{
             setFollowed(!followed);
-            await portfolioService.follow(name);
+            await portfolioService.follow(id);
         }
         catch{
             console.log("error");
@@ -34,7 +34,7 @@ function PortfolioView({ children, to, ...props }) {
 
     const deletePortfolio= async ()=>{
         try{
-            await portfolioService.deletePortfolio(name);
+            await portfolioService.deletePortfolio(id);
         }
         catch{
             console.log("error");
@@ -45,7 +45,7 @@ function PortfolioView({ children, to, ...props }) {
         <div className=' flex flex-col mx-5 md:mx-10 bg-dark '>
             <div className='flex flex-rows place-content-between '>
                 <div className='flex flex-col self-start items-start px-1 py-2'>
-                    <h3>{name}</h3>
+                    <h3>{pftData.name}</h3>
                     <div className='flex flex-rows gap-4'>
                         <h4>{round10(pftData.total_value, -2)}€</h4>
                         {pftData.perf > 0 ?
@@ -74,16 +74,16 @@ function PortfolioView({ children, to, ...props }) {
             <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-slate-600">
                 <ul class="flex flex-wrap -mb-px">
                     <li class="mr-2">
-                        <DeepLink to={`/Portfolios/${name}/allocation`}>Valeurs</DeepLink>
+                        <DeepLink to={`/Portfolios/${id}/allocation`}>Valeurs</DeepLink>
                     </li>
                     <li class="mr-2">
-                        <DeepLink to={`/portfolios/${name}/preformance`}>Preformances</DeepLink>
+                        <DeepLink to={`/portfolios/${id}/preformance`}>Preformances</DeepLink>
                     </li>
                     <li class="mr-2">
-                        <DeepLink to={`/portfolios/${name}/pies`}>Allocation</DeepLink>
+                        <DeepLink to={`/portfolios/${id}/pies`}>Allocation</DeepLink>
                     </li>
                     <li class="mr-2">
-                        <DeepLink to={`/portfolios/${name}/orders`}>Transactions</DeepLink>
+                        <DeepLink to={`/portfolios/${id}/orders`}>Transactions</DeepLink>
                     </li>
                 </ul>
             </div>

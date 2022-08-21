@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import authService from 'services/authService';
 import CustomLink from '../components/CustomLink';
-
+import logoutIcon from '../assets/img/logout.svg'
 
 
 function Nav(props) {
@@ -16,7 +16,7 @@ function Nav(props) {
         <nav className='px-6 box-border flex place-content-between items-center shadow-md overflow-hidden dark:bg-gray-700'>
             <div className='flex lg:px-14'>
 
-                <div className='p-4 flex gap-4'>
+                <div className='p-2 flex gap-4 mx-10'>
                     <Link className='text-3xl font-large font-bold text-sky-600 hover:text-sky-900 dark:text-slate-100' to="/">Karius<span className='text-sm text-sky-900 font-bold dark:text-slate-100'>.démo</span></Link>
                 </div>
 
@@ -27,36 +27,37 @@ function Nav(props) {
                         </svg>
                         Explorer
                     </CustomLink>
-                    <CustomLink to="/portfolios">Mes Portefeuils/Suivis</CustomLink>
+                    <CustomLink to="/portfolios">Mes Portefeuilles</CustomLink>
                     {/* <CustomLink to="/predictions">IA Predictions</CustomLink> */}
                     {/* <CustomLink to="/watchLists">WatchLists</CustomLink> */}
                 </div>
             </div>
 
-            <div className='inline-flex'>
+            <div className='flex place-items-center'>
 
                 {!user ?
                     <Link className='btn-primary h-fit hidden md:block lg:mx-10' to="/login">login</Link>
                     :
                     < >
-                        <a  href="/login"  className='btn-primary h-fit hidden md:block lg:mx-10' onClick={logout}>
-                            LogOut
+                        <a href="/login" className='btn-primary h-fit hidden md:block lg:mx-10' onClick={logout}>
+                            <img src={logoutIcon} data-src={logoutIcon} alt="logout" className="lazy lazyLoaded w-4 text-white" data-load-priority="0" />
                         </a>
                     </>
                 }
                 <Toggle />
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button"
+                        onClick={() => setPopover(true)}
+                        class="bg-dark bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
             </div>
 
-            <div class="-mr-2 flex items-center md:hidden">
-                <button type="button"
-                    onClick={() => setPopover(true)}
-                    class="bg-dark bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-            </div>
+
 
             {popover ?
                 <div onClick={close} class="absolute z-10 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
@@ -76,14 +77,19 @@ function Nav(props) {
                         </div>
                         <div class="px-2 pt-2 pb-3 space-y-1 bg-dark">
 
-                            <Link to="/explore" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Portfolios</Link>
+                            <Link to="/explore" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-white hover:bg-slate-400">Explorer</Link>
 
-                            <Link to="/portfolios" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">Mes Portefeuils/Suivis</Link>
+                            <Link to="/portfolios" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-white hover:bg-slate-400">Mes Portefeuilles</Link>
 
-                            <Link to="/watchLists" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">WatchLists</Link>
-
+                            <Link to="/watchLists" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-white hover:bg-slate-400">WatchLists</Link>
+                
+                            {!user ?
+                                <button className='btn-primary'> <Link to="/login" > Se connecter</Link> </button>: 
+                                <button className='btn-primary' onClick={logout}>
+                                <Link to="/login" > Se deconnecter</Link>
+                            </button>
+                            }
                         </div>
-                        <Link to="/login" class="block w-full px-5 py-3 text-center font-medium text-sky-600 bg-gray-50 hover:bg-gray-100"> Log in </Link>
                     </div>
                 </div>
                 : null}

@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import useModal from 'hooks/UseModal';
 import AddTransaction from 'pages/Portfolios/AddTransaction';
 import React, { useState } from 'react';
@@ -98,7 +99,7 @@ const TransactionLine = (r, addclick, editable) => {
                 </div>
             </td>
             <td className=''>
-                <p className='font-semibold'>{r.date}</p>
+                <p className='font-semibold'>{format(new Date(r.date), 'MM/dd/yyyy')}</p>
             </td>
             <td className=''>
                 <p>{r.qty}</p>

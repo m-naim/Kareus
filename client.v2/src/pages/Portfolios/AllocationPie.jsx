@@ -25,7 +25,7 @@ const tooltip = {
 }
 
 function AllocationPie({ adata }) {
-  const { name } = useParams();
+  const { id } = useParams();
   const [actions, setActions] = useState(defaultData);
   const [secteurs, setSecteurs] = useState(defaultData);
   const [industries, setIndustries] = useState(defaultData);
@@ -34,7 +34,7 @@ function AllocationPie({ adata }) {
 
   const fetchData = async () => {
     try {
-      const result = await portfolioService.get(name);
+      const result = await portfolioService.get(id);
       getDistrib(result.allocation,'name', setActions);
       getDistrib(result.allocation, 'currency', setDevises);
       getDistrib(result.allocation, 'sector', setSecteurs);

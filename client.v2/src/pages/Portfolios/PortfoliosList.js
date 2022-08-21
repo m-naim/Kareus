@@ -25,6 +25,7 @@ function PortfoliosList(props) {
 
     const addClick =async (payload) => {  
         if(payload.name==="") return
+        if(payload.visibilite==="") return
         if(payload.value<0) return
         try{
             await portfolioService.add(payload);
@@ -50,7 +51,7 @@ function PortfoliosList(props) {
     return (
         <div className='flex flex-col justify-center items-center bg-dark p-4'>
             <section className='flex w-full max-w-5xl p-2 place-content-between'>
-                <p className='text-2xl justify-start text-sky-700'>Portfolios</p>
+                <p className='text-2xl justify-start text-sky-700'> </p>
                 <button className='btn-primary w-32' onClick={toggle}>+ Ajouter</button>
             </section>
 

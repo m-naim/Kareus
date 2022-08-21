@@ -6,9 +6,9 @@ const Portfolio = require('../models/portfolio');
 const stock = require('../models/stock');
 const portfolioUtils = require('../utils/portfolioUtils');
 
-router.get('/api/v1/data/portfolio/:name', (req, res) => {
+router.get('/api/v1/data/portfolio/:id', (req, res) => {
   Portfolio.findOne({
-    name: req.params.name,
+    _id: req.params.id,
   })
     .exec((err, state) => {
       if (err) res.status(500).send({ error: 'Something failed!' });
@@ -17,10 +17,11 @@ router.get('/api/v1/data/portfolio/:name', (req, res) => {
     });
 });
 
-router.get('/api/v1/portfolio/:name', (req, res) => {
-  console.log(req.params.name);
+
+router.get('/api/v1/portfolio/:id', (req, res) => {
+  console.log(req.params.id);
   Portfolio.findOne({
-    name: req.params.name,
+    _id: req.params.id,
   }).populate('allocation.asset')
     .exec((err, state) => {
       if (err) res.status(500).send({ error: 'Something failed!' });
@@ -29,21 +30,9 @@ router.get('/api/v1/portfolio/:name', (req, res) => {
     });
 });
 
-router.get('/api/v1/portfolio/:name', (req, res) => {
-  console.log(req.params.name);
-  Portfolio.findOne({
-    name: req.params.name,
-  }).populate('allocation.asset')
-    .exec((err, state) => {
-      if (err) res.status(500).send({ error: 'Something failed!' });
-      else if (!state || state.length === 0) res.status(404).send({ message: 'not found' });
-      else res.send(state);
-    });
-});
-
-router.put('/api/v1/portfolio/follow/:name',auth, async (req, res) => {
+router.put('/api/v1/portfolio/follow/:id',auth, async (req, res) => {
   try{
-    const pft = await Portfolio.findOne({name: req.params.name})
+    const pft = await Portfolio.findOne({_id: req.params.id})
     if(pft==null) res.status(404).send({ message: 'not found' });
     pft.addFollower(req.user).save()
     res.status(201).send(pft);

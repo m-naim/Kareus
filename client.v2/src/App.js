@@ -36,7 +36,7 @@ function App() {
         </Route>
         <Route path="/explore" element={<ExplorerView />} />
         <Route path="/portfolios" element={<PrivateRoute token={token} />} >
-          <Route path="/portfolios/:name/" element={<PortfolioView/>} >
+          <Route path="/portfolios/:id/" element={<PortfolioView/>} >
             <Route index element={<AllocationView />} />
             <Route path="allocation" element={<AllocationView />} />
             <Route path="Preformance" element={<Performance />} />

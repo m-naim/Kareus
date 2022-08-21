@@ -10,7 +10,7 @@ function AddPortfolio({ hide, addClick }) {
         <div className=" md:w-auto shadow-xl relative flex gap-6 flex-col  justify-center items-center bg-white py-12 px-12 rounded-md bg-dark ">
             <div class="flex gap-4 flex-col ">
                 <div className='flex gap-8 items-center justify-between'>
-                    <p class="text-xl font-semibold leading-7 lg:leading-9 text-gray-800" >Creer une portfeuille</p>
+                    <p class="text-xl font-semibold leading-7 lg:leading-9 text-gray-800" >Creer un portfeuille</p>
                     <div class="-mr-2">
                         <button type="button"
                             onClick={hide}

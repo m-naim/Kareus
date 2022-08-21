@@ -45,7 +45,7 @@
 .crypto-wrap-1 {
   position: absolute;
   width: 2rem;
-  left: 2rem;
+  left: 6rem;
   bottom:6rem;
 }
 
@@ -59,13 +59,19 @@
 .crypto-wrap-3{
   position: absolute;
   width: 2rem;
-  left: 8rem ;
+  left: 18rem ;
   top:12rem;
 }
 
 .crypto-wrap-4 {
   position: absolute;
   width: 2rem;
+  left: 28rem;
+  top:4rem;
+}
+
+.crypto-wrap-5 {
+  position: absolute;
   left: 18rem;
   top:4rem;
 }
