@@ -13,11 +13,21 @@ async function CheckError(response) {
   throw Error(data.msg);
 }
 
+function authHeader() {
+  const user = JSON.parse(localStorage.getItem('user'));
+  console.log("authHeader",user)
+  if (user && user.token) {
+    // for Node.js Express back-end
+    return { 'x-auth-token': user.token };
+  } else {
+    return {};
+  }
+}
 
 function post(path, body) {
   return fetch(`${host}${path}`, {
     credentials: 'omit',
-    headers: { 'content-type': 'application/json;charset=UTF-8', 'sec-fetch-mode': 'cors' },
+    headers: { 'content-type': 'application/json;charset=UTF-8', 'sec-fetch-mode': 'cors', ...authHeader()},
     body: JSON.stringify(body),
     method: 'POST',
     mode: 'cors',
@@ -28,18 +38,8 @@ function post(path, body) {
 function get(path) {
   return fetch(`${host}${path}`, {
     credentials: 'omit',
-    headers: { 'content-type': 'application/json;charset=UTF-8', 'sec-fetch-mode': 'cors' },
+    headers: { 'content-type': 'application/json;charset=UTF-8', 'sec-fetch-mode': 'cors', ...authHeader() },
     method: 'GET',
-    mode: 'cors',
-  })
-    .then(CheckError);
-}
-
-function getWithToken(path, token) {
-  return fetch(`${host}${path}`, {
-    credentials: 'omit',
-    headers: { 'content-type': 'application/json;charset=UTF-8', 'sec-fetch-mode': 'cors', 'x-auth-token': token },
-    method: 'Post',
     mode: 'cors',
   })
     .then(CheckError);
@@ -48,9 +48,19 @@ function getWithToken(path, token) {
 function put(path, body) {
   return fetch(`${host}${path}`, {
     credentials: 'omit',
-    headers: { 'content-type': 'application/json;charset=UTF-8', 'sec-fetch-mode': 'cors' },
+    headers: { 'content-type': 'application/json;charset=UTF-8', 'sec-fetch-mode': 'cors', ...authHeader()},
     body: JSON.stringify(body),
     method: 'PUT',
+    mode: 'cors',
+  })
+    .then(CheckError);
+}
+
+function deleteReq(path) {
+  return fetch(`${host}${path}`, {
+    credentials: 'omit',
+    headers: { 'content-type': 'application/json;charset=UTF-8', 'sec-fetch-mode': 'cors', ...authHeader()},
+    method: 'DELETE',
     mode: 'cors',
   })
     .then(CheckError);
@@ -59,7 +69,7 @@ const http = {
   post,
   get,
   put,
-  getWithToken,
+  deleteReq
 };
 
 export default http;

@@ -2,6 +2,10 @@ import http from './http.js';
 
 
 function getAll() {
+  return http.get(`/api/v1/portfolios/public`);
+}
+
+function getMyPortfolios() {
   return http.get(`/api/v1/portfolios/`);
 }
 
@@ -19,6 +23,10 @@ function get(portfolioName='curent') {
 
 function getData(portfolioName='curent') {
   return http.get(`/api/v1/data/portfolio/${portfolioName}`);
+}
+
+function follow(name) {
+  return http.put(`/api/v1/portfolio/follow/${name}`);
 }
 
 function post(state) {
@@ -57,6 +65,10 @@ function AddTransaction(idPft,sense,ticker,prix,qty,date) {
   return http.put('/api/v1/transaction/portfolio', body);
 }
 
+function deletePortfolio(name) {
+  return http.deleteReq(`/api/v1/portfolio/delete/${name}`);
+}
+
 const portfolioService = {
   getAll,
   get,
@@ -65,7 +77,10 @@ const portfolioService = {
   getStocksNameByName,
   getStocksContains,
   add,
-  AddTransaction
+  AddTransaction,
+  getMyPortfolios,
+  follow,
+  deletePortfolio
 };
 
 export default portfolioService;

@@ -54,8 +54,21 @@ function Home(props) {
                 </div>
 
             </header>
+            <section className='w-full p-6 bg-gray-100 dark:bg-gray-700'>
+                <h1 className='text-center'> Rejoinez la communauté</h1>
+                <div className='flex justify-evenly p-6'>
+                    <div className='flex flex-col'>
+                        <h3>Utilisateurs</h3>
+                        <h3 className='text-center'>100</h3>
+                    </div>
 
-            <section className='w-full p-8 bg-gray-100 bg-dark'>
+                    <div>
+                        <h3>Portefeuilles Crées</h3>
+                        <h3 className='text-center'>100</h3>
+                    </div>
+                </div>
+            </section>
+            <section className='w-full p-8 bg-dark'>
                     <div className='flex flex-wrap justify-center -m-4'>
                         <div className='shadow-md p-6 bg-white md:w-1/4 w-full m-4 bg-dark'>
                             <div className='flex gap-4 content-center items-center'>

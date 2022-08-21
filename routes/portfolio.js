@@ -1,4 +1,5 @@
 const express = require('express');
+const auth = require('../midleware/auth');
 
 const router = express.Router();
 const Portfolio = require('../models/portfolio');
@@ -27,8 +28,35 @@ router.get('/api/v1/portfolio/:name', (req, res) => {
       else res.send(state);
     });
 });
-router.get('/api/v1/portfolios', (req, res) => {
-  Portfolio.find({})
+
+router.get('/api/v1/portfolio/:name', (req, res) => {
+  console.log(req.params.name);
+  Portfolio.findOne({
+    name: req.params.name,
+  }).populate('allocation.asset')
+    .exec((err, state) => {
+      if (err) res.status(500).send({ error: 'Something failed!' });
+      else if (!state || state.length === 0) res.status(404).send({ message: 'not found' });
+      else res.send(state);
+    });
+});
+
+router.put('/api/v1/portfolio/follow/:name',auth, async (req, res) => {
+  try{
+    const pft = await Portfolio.findOne({name: req.params.name})
+    if(pft==null) res.status(404).send({ message: 'not found' });
+    pft.addFollower(req.user).save()
+    res.status(201).send(pft);
+  }
+  catch (error){
+    if (err) res.status(500).send({ error: 'Something failed!' });
+    else if (!state || state.length === 0) res.status(404).send({ message: 'not found' });
+  }
+});
+
+//get owend portfolios
+router.get('/api/v1/portfolios',auth, (req, res) => {
+  Portfolio.find({$or:[{owner:req.user}, {followers:req.user} ]})
     .exec((err, state) => {
       if (err) res.status(500).send({ error: 'Something failed!' });
       else if (!state || state.length === 0) res.status(404).send({ message: 'not found' });
@@ -36,8 +64,18 @@ router.get('/api/v1/portfolios', (req, res) => {
     });
 });
 
-router.post('/api/v1/portfolio', (req, res) => {
+router.get('/api/v1/portfolios/public', (req, res) => {
+  Portfolio.find({public:true})
+    .exec((err, state) => {
+      if (err) res.status(500).send({ error: 'Something failed!' });
+      else if (!state || state.length === 0) res.status(404).send({ message: 'not found' });
+      else res.send(state.map((pft) => portfolioUtils.getData(pft)));
+    });
+});
+
+router.post('/api/v1/portfolio',auth,(req, res) => {
   const newPortfolio = new Portfolio(req.body);
+  newPortfolio.addUser(req.user)
   newPortfolio.save()
     .then(
       () => res.status(200).send({ message: 'new Portfolio added with success' }),
@@ -59,7 +97,7 @@ router.put('/api/v1/transaction/portfolio', async (req, res) => {
       const newQty = allocation[assetIndex].qty + transaction.qty;
       allocation[assetIndex].bep = (allocation[assetIndex].bep * allocation[assetIndex].qty + transaction.price * transaction.qty) / newQty;
       allocation[assetIndex].qty = newQty;
-      allocation[assetIndex].value = newQty;
+      allocation[assetIndex].value = allocation[assetIndex].bep*newQty;
     } else {
       const newAlloc = {
         asset: await stock.findOne({ symbol: transaction.symbol }),
@@ -72,7 +110,8 @@ router.put('/api/v1/transaction/portfolio', async (req, res) => {
     }
 
     allocation.map((elm) => {
-      elm.total_value = elm.asset.last * elm.qty;
+      if(elm.asset.last!=null) elm.total_value = elm.asset.last * elm.qty;
+      else elm.total_value = elm.bep * elm.qty;
       return elm;
     });
 

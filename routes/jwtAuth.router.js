@@ -65,7 +65,7 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res
-        .status(400)
+        .status(404)
         .json({ msg: 'No account with this email has been registered.' });
     }
 

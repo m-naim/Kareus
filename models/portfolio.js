@@ -2,10 +2,14 @@ const mongoose = require('mongoose');
 
 const portfolioSchema = new mongoose.Schema(
   {
-    userId: {
+    owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
+    followers: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    }],
     name: String,
     allocation: [
       {
@@ -40,7 +44,13 @@ const portfolioSchema = new mongoose.Schema(
 );
 
 portfolioSchema.methods.addUser = function (u) {
-  this.user.push(u);
+  this.owner=u;
+  return this;
+};
+
+portfolioSchema.methods.addFollower= function (u) {
+  if(this.followers.includes(u)) this.followers = this.followers.filter((e)=> e != u )
+  else this.followers.push(u)
   return this;
 };
 

@@ -2,16 +2,19 @@ import {React,useState,useLayoutEffect} from 'react';
 import Table from '../../components/Table';
 import { useParams } from 'react-router-dom';
 import portfolioService from '../../services/portfolioService'
+import authService from 'services/authService';
 
 const columns=['symbol','weight','qty','last','bpe'] 
 function AllocationView(props) {
     const {name} = useParams();
     const [portfolio, setPortfolio] = useState({allocation:[],transactions:[]});
+    const [editable, setEditable] = useState(false);
 
     const fetchData = async () => {
         console.log(name);
         try{
             const data = await portfolioService.get(name);
+            const userId= authService.getCurrentUser().user.id;
 
             data.allocation= data.allocation.map((item, i) => {
                 item.id = i + 1;
@@ -21,7 +24,7 @@ function AllocationView(props) {
             data.transactions.forEach((item, i) => {
                 item.id = i + 1;
             });
-
+            if(data.owner===userId) setEditable(true);
             setPortfolio(data);
         }
         catch{
@@ -51,7 +54,7 @@ function AllocationView(props) {
 
     return (
         <div>
-            <Table columns={columns} rows={portfolio.allocation} addtransaction={addtransaction}/>
+            <Table columns={columns} editable={editable} rows={portfolio.allocation} addtransaction={addtransaction}/>
         </div>
     );
 }
