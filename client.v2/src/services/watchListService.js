@@ -1,18 +1,21 @@
+import config from 'config.js';
 import http from './http.js';
 
+
+const host = config.API_URL;
 function getAll() {
-    return http.get(`/api/v1/watchlists/`);
+    return http.get(`${host}/api/v1/watchlists/`);
 }
   
 function get(name='curent') {
-    return http.get(`/api/v1/watchlists/${name}`);
+    return http.get(`${host}/api/v1/watchlists/${name}`);
 }
   
 function add(name) {
-    return http.post('/api/v1/watchlists/',{name} );
+    return http.post(`${host}/api/v1/watchlists/`,{name} );
 }
 function addStock(payload) {
-  return http.put('/api/v1/watchlists/',payload);
+  return http.put(`${host}/api/v1/watchlists/`,payload);
 }
   
   const watchListService = {

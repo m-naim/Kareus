@@ -1,36 +1,39 @@
 import http from './http.js';
+import config from '../config.js';
 
+const host = config.API_URL;
+const qwantHost= config.QWANTAPI_URL;
 
 function getAll() {
-  return http.get(`/api/v1/portfolios/public`);
+  return http.get(`${host}/api/v1/portfolios/public`);
 }
 
 function getMyPortfolios() {
-  return http.get(`/api/v1/portfolios/`);
+  return http.get(`${host}/api/v1/portfolios/`);
 }
 
 function getStocksNameByName(name) {
-  return http.get(`/api/v1/stocks/search/${name}`);
+  return http.get(`${host}/api/v1/stocks/search/${name}`);
 }
 
 function getStocksContains(name) {
-  return http.get(`/api/v1/stocks/contains/${name}`);
+  return http.get(`${host}/api/v1/stocks/contains/${name}`);
 }
 
 function get(portfolioName='curent') {
-  return http.get(`/api/v1/portfolio/${portfolioName}`);
+  return http.get(`${host}/api/v1/portfolio/${portfolioName}`);
 }
 
 function getData(portfolioName='curent') {
-  return http.get(`/api/v1/data/portfolio/${portfolioName}`);
+  return http.get(`${host}/api/v1/data/portfolio/${portfolioName}`);
 }
 
 function follow(id) {
-  return http.put(`/api/v1/portfolio/follow/${id}`);
+  return http.put(`${host}/api/v1/portfolio/follow/${id}`);
 }
 
 function post(state) {
-  return http.post('/api/v1/portfolios/', state);
+  return http.post(`${host}/api/v1/portfolios/`, state);
 }
 
 function add(payload) {
@@ -48,7 +51,7 @@ function add(payload) {
     allocatio: [],
     last_perfs_update: new Date()
   }
-  return http.post('/api/v1/portfolio/', body);
+  return http.post(`${host}/api/v1/portfolio/`, body);
 }
 
 function AddTransaction(idPft,sense,ticker,prix,qty,date) {
@@ -62,11 +65,22 @@ function AddTransaction(idPft,sense,ticker,prix,qty,date) {
         qty:qty*coef,
     },
   }
-  return http.put('/api/v1/transaction/portfolio', body);
+  return http.put(`${host}/api/v1/transaction/portfolio`, body);
 }
 
 function deletePortfolio(id) {
-  return http.deleteReq(`/api/v1/portfolio/delete/${id}`);
+  return http.deleteReq(`${host}/api/v1/portfolio/delete/${id}`);
+}
+
+function getPerformances(id){
+  return http.get(`${qwantHost}/api/v1/portfolio/${id}/performance`);
+}
+function getDividends(id){
+  return http.get(`${qwantHost}/api/v1/portfolio/${id}/dividends`);
+}
+
+function getMetrics(id) {
+  return http.get(`${qwantHost}/api/v1/portfolio/${id}/stats`);
 }
 
 const portfolioService = {
@@ -80,7 +94,10 @@ const portfolioService = {
   AddTransaction,
   getMyPortfolios,
   follow,
-  deletePortfolio
+  deletePortfolio,
+  getPerformances,
+  getMetrics,
+  getDividends,
 };
 
 export default portfolioService;

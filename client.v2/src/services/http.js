@@ -1,8 +1,4 @@
 
-import config from '../config.js';
-
-const host = config.API_URL;
-
 async function CheckError(response) {
   const data = await response.json();
 
@@ -25,7 +21,7 @@ function authHeader() {
 }
 
 function post(path, body) {
-  return fetch(`${host}${path}`, {
+  return fetch(`${path}`, {
     credentials: 'omit',
     headers: { 'content-type': 'application/json;charset=UTF-8', 'sec-fetch-mode': 'cors', ...authHeader()},
     body: JSON.stringify(body),
@@ -36,7 +32,7 @@ function post(path, body) {
 }
 
 function get(path) {
-  return fetch(`${host}${path}`, {
+  return fetch(`${path}`, {
     credentials: 'omit',
     headers: { 'content-type': 'application/json;charset=UTF-8', 'sec-fetch-mode': 'cors', ...authHeader() },
     method: 'GET',
@@ -46,7 +42,7 @@ function get(path) {
 }
 
 function put(path, body) {
-  return fetch(`${host}${path}`, {
+  return fetch(`${path}`, {
     credentials: 'omit',
     headers: { 'content-type': 'application/json;charset=UTF-8', 'sec-fetch-mode': 'cors', ...authHeader()},
     body: JSON.stringify(body),
@@ -57,7 +53,7 @@ function put(path, body) {
 }
 
 function deleteReq(path) {
-  return fetch(`${host}${path}`, {
+  return fetch(`${path}`, {
     credentials: 'omit',
     headers: { 'content-type': 'application/json;charset=UTF-8', 'sec-fetch-mode': 'cors', ...authHeader()},
     method: 'DELETE',

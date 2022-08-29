@@ -17,6 +17,8 @@ import TransactionView from 'pages/Portfolios/TransactionView';
 import React, { useState } from 'react';
 import PrivateRoute from "./components/PrivateRoute"
 import ExplorerView from 'pages/explorer/ExplorerView';
+import DividendsView from 'pages/Portfolios/DividendsView';
+import StatisticsView from 'pages/Portfolios/StatisticsView';
 
 Chart.register(...registerables)
 
@@ -25,7 +27,7 @@ function App() {
 
   
   return (
-    <div className='w-screen h-screen overflow-auto m-0 p-0 bg-dark' >
+    <div className='w-screen h-screen overflow-auto m-0 p-0 bg-dark bg-gray-100 ' >
       <Nav/>
       <Routes >
         <Route path="/" element={<Home />} />
@@ -42,6 +44,8 @@ function App() {
             <Route path="Preformance" element={<Performance />} />
             <Route path="Pies" element={<AllocationPie />} />
             <Route path="Orders" element={<TransactionView />} />
+            <Route path="dividends" element={<DividendsView />} />
+            <Route path="stats" element={<StatisticsView />} />
           </Route>
         </Route>
         <Route path="/watchLists" element={<WatchListView />} />

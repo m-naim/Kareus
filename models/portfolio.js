@@ -26,7 +26,14 @@ const portfolioSchema = new mongoose.Schema(
         last: Number,
       },
     ],
-    transactions: [],
+    transactions: [
+      {
+        qty: Number,
+        price: Number,
+        date: Date,
+        symbol: String,
+      }
+    ],
     cash_flow: [{
       date: Date,
       amount: Number,
@@ -45,12 +52,12 @@ const portfolioSchema = new mongoose.Schema(
 );
 
 portfolioSchema.methods.addUser = function (u) {
-  this.owner=u;
+  this.owner = u;
   return this;
 };
 
-portfolioSchema.methods.addFollower= function (u) {
-  if(this.followers.includes(u)) this.followers = this.followers.filter((e)=> e != u )
+portfolioSchema.methods.addFollower = function (u) {
+  if (this.followers.includes(u)) this.followers = this.followers.filter((e) => e != u)
   else this.followers.push(u)
   return this;
 };

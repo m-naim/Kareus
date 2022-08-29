@@ -3,6 +3,7 @@ import './index.css'
 import crypto1 from 'assets/img/crypto.btc.svg'
 import crypto2 from 'assets/img/crypto.eth.svg'
 import google from 'assets/img/google.svg'
+import processor from 'assets/img/processor.png'
 
 import stats from 'assets/img/stats.jpg'
 import { Link } from 'react-router-dom';
@@ -13,7 +14,7 @@ function Home(props) {
 
             <header className="flex place-items-center justify-around w-screen gap-0 flex-col md:flex-row-reverse overflow-hidden">
 
-                <div className='crypto-block w-full max-w-xl h-60 ' >
+                <div className='crypto-block w-full max-w-sm h-80 ' >
                     <div className="crypto-wrap-1 animate-bounce" >
                         <img src={crypto1} data-src={crypto1} alt="crypto" className="lazy lazyLoaded" data-load-priority="0" />
                     </div>
@@ -25,21 +26,21 @@ function Home(props) {
                         <img src={crypto2} data-src={crypto2} alt="crypto" className="lazy lazyLoaded" data-load-priority="0" />
                     </div>
                     <div className="crypto-wrap-4 animate-bounce" >
-                        <img src={crypto1} data-src={crypto1} alt="crypto" className="lazy lazyLoaded" data-load-priority="0" />
+                        <img src={google} data-src={google} alt="crypto" className="lazy lazyLoaded" data-load-priority="0" />
                     </div>
 
-                    <div class="crypto-wrap-5 shadow-md bg-white rounded w-16 p-4" >
-                        <img src={google} data-src={google} alt="crypto" className="lazy lazyLoaded w-8" data-load-priority="0" />
+                    <div class="crypto-wrap-5 " >
+                        <img src={processor} data-src={processor} alt="crypto" className="lazy lazyLoaded w-60" data-load-priority="0" />
                     </div>
                 </div>
 
 
-                <div class="flex flex-col p-8   w-full max-w-xl rounded md:bg-transparent">
+                <div class="flex flex-col p-8 my-10 text-center md:text-left  w-full max-w-xl  ">
                     <div className='w-full'>
 
-                        <h1 class="flex flex-col place-content-center text-5xl md:text-5xl font-extrabold leading-tighter tracking-tighter mb-4 aos-init aos-animate text-gray-900 ">
+                        <h1 class="flex flex-col place-content-center text-4xl font-semibold mb-4 aos-init aos-animate  ">
                             <span class="block ">L'application pour</span>
-                            <span class="block text-sky-600 "> suivre et Partager </span>
+                            <span class="block text-primary "> suivre et partager </span>
                             <span class="block ">vos Portefeuilles</span>
                         </h1>
 
@@ -47,24 +48,24 @@ function Home(props) {
                     </div>
 
                     <div class="mt-8 w-full">
-                            <Link to="/signup" >
+                            <Link to="/portfolios" >
                                 <button className="btn-primary text-xl">  Esseyer Gratuitement</button>
                             </Link>
                     </div>
                 </div>
             </header >
 
-            <section className='w-full p-6 bg-blue-50 dark:bg-slate-700'>
-                <p className='text-center text-5xl'> Rejoinez la communauté</p>
+            <section className='w-full p-6 bg-gray-50 dark:bg-slate-700'>
+                <p className='text-center text-xl text-primary'> Rejoinez la communauté</p>
                 <div className='flex justify-evenly p-6'>
                     <div className='flex flex-col'>
-                        <h2>Utilisateurs</h2>
-                        <h3 className='text-center text-primary text-5xl'>100</h3>
+                        <h3 className='text-center text-primary text-5xl'>5</h3>
+                        <h5 className='text-lg'>Utilisateurs</h5>
                     </div>
 
                     <div>
-                        <h2>Portefeuilles Crées</h2>
-                        <h3 className='text-center text-primary text-5xl'>100</h3>
+                        <h3 className='text-center text-primary text-5xl'>12</h3>
+                        <h5 className='text-lg'>Portefeuilles Crées</h5>
                     </div>
                 </div>
             </section>

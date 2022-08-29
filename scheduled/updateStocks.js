@@ -1,21 +1,10 @@
 const cron = require('node-cron');
 // const { spawn } = require('child_process');
+const rp = require('request-promise');
 
-const job = cron.schedule('5 * * * *', () => {
+const job = cron.schedule('* 1 * * *', async () => {
   console.log('pyapi wake up:');
-  // let dataToSend;
-  // spawn new child process to call the python script
-  // const python = spawn('python', ['python_scripts/update_last.py']);
-  // collect data from script
-  // python.stdout.on('data', (data) => {
-  //   console.log('Pipe data from python script ...');
-  //   dataToSend = data.toString();
-  // });
-  // in close event we are sure that stream from child process is closed
-  // python.on('close', (code) => {
-  //   console.log(`child process close all stdio with code ${code}`);
-  //   // send data to browser
-  //   console.log(dataToSend);
-  // });
+  const res= await rp.get("https://qwantapi.herokuapp.com/health")
+  console.log(res)
 });
 module.exports = job;

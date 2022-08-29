@@ -16,8 +16,9 @@ function Nav(props) {
         <nav className='px-6 box-border flex place-content-between items-center shadow-md overflow-hidden dark:bg-gray-700'>
             <div className='flex lg:px-14'>
 
-                <div className='p-2 flex gap-4 mx-10'>
-                    <Link className='text-3xl font-large font-bold text-sky-600 hover:text-sky-900 dark:text-slate-100' to="/">Karius<span className='text-sm text-sky-900 font-bold dark:text-slate-100'>.démo</span></Link>
+                <div className='p-2 flex gap-1 mx-10'>
+                    <Link className='text-3xl font-large font-bold text-primary hover:text-blue-900 dark:text-slate-100' to="/">Karius </Link>
+                    <span className='text-[8px] h-5 bg-primary rounded-md p-1' >Beta</span>
                 </div>
 
                 <div className='flex gap-4 justify-center items-center hidden md:flex'>

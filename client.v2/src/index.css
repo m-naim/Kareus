@@ -46,6 +46,9 @@
   .text-primary{
     @apply text-blue-700 dark:text-blue-500;
   }
+  .bg-primary{
+    @apply bg-blue-700 dark:bg-blue-500 text-white;
+  }
 
   .multi-select{
     @apply flex gap-4 bg-gray-200 rounded-md p-1 dark:bg-gray-700

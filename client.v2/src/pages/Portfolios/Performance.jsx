@@ -8,7 +8,7 @@ import MultiSelect from 'components/MultiSelect';
 
 
 const chartDataInit = {
-    labels: [new Date()],
+    labels: [],
     datasets: [{
         label: "Performance",
         backgroundColor: 'rgb(109, 99, 255)',
@@ -18,15 +18,16 @@ const chartDataInit = {
 }
 
 const chartOptions = {
+
+    responsive: true,
+    maintainAspectRatio: false,
     radius: 0,
     scales: {
         x: {
 
             ticks: {
                 callback: function (val, index) {
-                    let date = new Date(this.getLabelForValue(val));
-                    let toDisplay = format(date, "dd MMM");
-                    return val % 3 == 0 ? toDisplay : '';
+                    return val % 3 == 0 ? this.getLabelForValue(val) : '';
                 },
             },
             grid: {
@@ -60,26 +61,44 @@ function Performance(props) {
     const [snpPerfs, setSnpPerfs] = useState(chartDataInit.datasets[0].data);
 
     const [period, setPeriod] = useState('ALL');
-    const [graphType, setType] = useState('%_variation');
+    const [graphType, setType] = useState('%Variation');
 
+    const formatDateStr= (input)=>{
+        return input.map(s=> format(new Date(s), "dd/MM/yyyy"))
+    }
     const fetchData = async () => {
         try {
+            portfolioService.getPerformances(id);
             const data = await portfolioService.get(id);
-            datesInit = data.perfs.date;
+            console.log(data);
+            datesInit = formatDateStr(data.perfs.date);
             setName(data.name);
             setDates(datesInit)
             perfsData = data.perfs;
-            setPerfs(perfsData.cum_All.map(x => (x - 1) * 100));
+            setPerfs(perfsData.performance);
+
+            fetchIndex("FCHI").then(
+                res => {
+                    setCaCperfs(res)
+                    benchmarksPerfs.push({ name: 'FCHI', perfs: res });
+                }
+            )
+            fetchIndex("GSPC").then(
+                res => {
+                    setSnpPerfs(res)
+                    benchmarksPerfs.push({ name: 'GSPC', perfs: res });
+                }
+            )
         }
         catch {
             console.log("error api");
         }
     };
 
-    const fetchIndex = async (idxName) => {
+    const fetchIndex = async (idxName,length=datesInit.length) => {
 
         const data = await portfolioService.getStocksContains(idxName);
-        let values = data[0].history.map(h => h.Close).slice(dates.length);
+        let values = data[0].history.slice(-length).map(h => h.Close)
 
         let x = 1;
         let perfsCAC = values.map((currVal, index) => {
@@ -95,6 +114,7 @@ function Performance(props) {
                 return (x - 1) * 100;
             }
             );
+
         return perfsCAC;
 
     };
@@ -102,62 +122,63 @@ function Performance(props) {
 
     useEffect(() => {
         fetchData();
-        fetchIndex("FCHI").then(
-            res => {
-                setCaCperfs(res)
-                benchmarksPerfs.push({ name: 'FCHI', perfs: res });
-            }
-        )
-        fetchIndex("GSPC").then(
-            res => {
-                setSnpPerfs(res)
-                benchmarksPerfs.push({ name: 'GSPC', perfs: res });
-            }
-        )
     }, []);
 
     const handlePeriodClick = (period) => {
         setPeriod(period);
         const fchiperfs = benchmarksPerfs.find((e) => e.name === 'FCHI').perfs
         const gsccPerfs = benchmarksPerfs.find((e) => e.name === 'GSPC').perfs
+
+        let perf = perfsData.performance
+        let data
+        let days= datesInit.length
         switch (period) {
             case 'ALL':
-                setDates(datesInit);
-                setPerfs(perfsData.cum_All.map(x => (x - 1) * 100));
-
-                setCaCperfs(fchiperfs.slice(-datesInit.length).map(x => x - fchiperfs[fchiperfs.length - datesInit.length]))
-                setSnpPerfs(gsccPerfs.slice(-datesInit.length).map(x => x - gsccPerfs[gsccPerfs.length - datesInit.length]))
                 break;
             case '1M':
-                setDates(datesInit.slice(-30));
-                setPerfs(perfsData.cum_1M.slice(-30).map(x => (x - 1) * 100));
-                setCaCperfs(fchiperfs.slice(-30).map(x => x - fchiperfs[fchiperfs.length - 30]))
-                setSnpPerfs(gsccPerfs.slice(-30).map(x => x - gsccPerfs[gsccPerfs.length - 30]))
+                days=30;
                 break;
             case '6M':
-                setDates(datesInit.slice(-180));
-                setPerfs(perfsData.cum_6M.slice(-180).map(x => (x - 1) * 100));
-                setCaCperfs(fchiperfs.slice(-180).map(x => x - fchiperfs[fchiperfs.length - 180]))
-                setSnpPerfs(gsccPerfs.slice(-180).map(x => x - gsccPerfs[gsccPerfs.length - 180]))
+                days=180;
+
                 break;
             case '1Y':
-                setDates(datesInit.slice(-365));
-                setPerfs(perfsData.cum_1Y.slice(-365).map(x => (x - 1) * 100));
-                setCaCperfs(fchiperfs.slice(-365).map(x => x - fchiperfs[fchiperfs.length - 365]))
-                setSnpPerfs(gsccPerfs.slice(-365).map(x => x - gsccPerfs[gsccPerfs.length - 180]))
+                days=365;
                 break;
             default:
                 break;
         }
+
+        data = perfsData.performance.slice(-days)
+        if(period!='ALL') perf=data.map(x => (x - data[0]));
+        setDates(datesInit.slice(-days));
+        setPerfs(perf);
+        setCaCperfs(fchiperfs.slice(-days).map(x => x - fchiperfs[fchiperfs.length - days]))
+        setSnpPerfs(gsccPerfs.slice(-days).map(x => x - gsccPerfs[gsccPerfs.length - days]))
     }
 
+    const handleTypeSelect=(type)=>{
+        setType(type)
+        switch (type) {
+            case 'Valeur':
+                setPerfs(perfsData.total);
+                break;
+            case '%Variation':
+                setPerfs(perfsData.performance);
+                break;
+            case 'Profits/Perts':
+                setPerfs(perfsData.pnl);
+            default:
+                break;
+        }
+    }
     return (
-        <div className='w-screen flex flex-col lg:flex-row'>
+        <div className='flex flex-col lg:flex-row max-w-4xl'>
 
-            <div className='p-2 m-2 flex flex-col items-center w-11/12 max-w-[50em]'>
-                <MultiSelect list={['Valeur', 'Profits/Perts', '%_variation']} active={graphType} select={setType} />
+            <div className='md:p-6 mt-2 flex flex-col items-center w-full'>
+                <MultiSelect list={['Valeur', 'Profits/Perts', '%Variation']} active={graphType} select={handleTypeSelect} />
 
-                <div className='w-full m-2'>
+                <div className='w-full m-2 min-h-[400px]'>
                     {dates.length > 0 ?
                         <Line
                             id={'perf'}
@@ -193,7 +214,8 @@ function Performance(props) {
                 </div>
                 <MultiSelect list={['1M', '6M', '1Y', 'ALL']} active={period} select={handlePeriodClick} />
             </div>
-            <div className='w-1/2 min-w-[10em] m-10'>
+
+            <div className='w-1/2 min-w-[10em] m-10 hidden'>
 
                 <div>
                     <h3 className='m-4 text-xl text-gray-600'>Comparaison</h3>

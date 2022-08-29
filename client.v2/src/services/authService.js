@@ -1,7 +1,10 @@
+import config from 'config.js';
 import http from './http.js';
 
+const host = config.API_URL;
+
 const register = (username, email, password) => {
-  return http.post("/register", {
+  return http.post(`${host}/register`, {
     displayName:username,
     email,
     password,
@@ -10,7 +13,7 @@ const register = (username, email, password) => {
 };
 const login = (email, password) => {
   return http
-    .post("/login", {
+    .post(`${host}/login`, {
       email,
       password,
     })
