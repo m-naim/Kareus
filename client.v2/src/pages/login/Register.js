@@ -34,7 +34,7 @@ function Login({setToken}) {
             <div class="p-4 w-full max-w-xl bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 bg-dark">
 
                 <form class="space-y-6" action="#">
-                    <h5 >Inscreption à Kaerus</h5>
+                    <h5 >Inscription </h5>
                     <div className='w-full'>
                         <label for="email" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Votre surnom</label>
                         <input type="email" name="email" id="email" class="input-primary" placeholder="Batman" value={username} onChange={(e) => onChangevalue(e, setUsername)}/>
@@ -45,7 +45,7 @@ function Login({setToken}) {
                         <input type="email" name="email" id="email" class="input-primary" placeholder="name@company.com" value={email} onChange={(e) => onChangevalue(e, setEmail)}/>
                     </div>
                     <div>
-                        <label for="password" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Votre mote de passe</label>
+                        <label for="password" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Votre mot de passe</label>
                         <input type="password" name="password" id="password" placeholder="••••••••" class="input-primary"value={password} onChange={(e) => onChangevalue(e, setPassword)} />
                     </div>
       
@@ -62,7 +62,7 @@ function Login({setToken}) {
                     )}
 
                     <div class="text-sm font-medium text-gray-500 dark:text-gray-300 p-2">
-                        Vos avez deja un compte? <Link class="text-primary hover:underline" to="/login">Se connecter</Link>
+                        Vos avez déjà un compte? <Link class="text-primary hover:underline" to="/login">Se connecter</Link>
                     </div>
                 </form>
             </div>

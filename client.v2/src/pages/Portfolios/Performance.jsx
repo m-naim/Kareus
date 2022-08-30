@@ -166,7 +166,7 @@ function Performance(props) {
             case '%Variation':
                 setPerfs(perfsData.performance);
                 break;
-            case 'Profits/Perts':
+            case 'Profits/Pertes':
                 setPerfs(perfsData.pnl);
             default:
                 break;
@@ -176,7 +176,7 @@ function Performance(props) {
         <div className='flex flex-col lg:flex-row max-w-4xl'>
 
             <div className='md:p-6 mt-2 flex flex-col items-center w-full'>
-                <MultiSelect list={['Valeur', 'Profits/Perts', '%Variation']} active={graphType} select={handleTypeSelect} />
+                <MultiSelect list={['Valeur', 'Profits/Pertes', '%Variation']} active={graphType} select={handleTypeSelect} />
 
                 <div className='w-full m-2 min-h-[400px]'>
                     {dates.length > 0 ?

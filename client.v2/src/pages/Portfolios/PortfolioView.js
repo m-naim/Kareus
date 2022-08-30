@@ -83,7 +83,7 @@ function PortfolioView({ children, to, ...props }) {
                     </div>
 
                     <div className='flex flex-col'>
-                        <p>Aujourd'hui</p>
+                        <p>Variation du jour</p>
                         <div className='flex gap-4'>
                             <p>x %</p>
                             <p>+xxx €</p>
@@ -91,7 +91,7 @@ function PortfolioView({ children, to, ...props }) {
                     </div>
 
                     <div className='flex flex-col'>
-                        <p>Randement</p>
+                        <p>Rendement</p>
                         <div className='flex gap-4'>
                             <p> x%</p>
                             <p>+ x</p>
@@ -105,7 +105,7 @@ function PortfolioView({ children, to, ...props }) {
                         <DeepLink to={`/Portfolios/${id}/allocation`}>Valeurs</DeepLink>
                     </li>
                     <li class="mr-2">
-                        <DeepLink to={`/portfolios/${id}/preformance`}>Preformances</DeepLink>
+                        <DeepLink to={`/portfolios/${id}/preformance`}>Performances</DeepLink>
                     </li>
                     <li class="mr-2">
                         <DeepLink to={`/portfolios/${id}/pies`}>Allocation</DeepLink>
@@ -114,10 +114,10 @@ function PortfolioView({ children, to, ...props }) {
                         <DeepLink to={`/portfolios/${id}/orders`}>Transactions</DeepLink>
                     </li>
                     <li class="mr-2">
-                        <DeepLink to={`/portfolios/${id}/dividends`}>dividends</DeepLink>
+                        <DeepLink to={`/portfolios/${id}/dividends`}>Dividendes</DeepLink>
                     </li>
                     <li class="mr-2">
-                        <DeepLink to={`/portfolios/${id}/stats`}>Statisques</DeepLink>
+                        <DeepLink to={`/portfolios/${id}/stats`}>Statistiques</DeepLink>
                     </li>
                 </ul>
             </div>

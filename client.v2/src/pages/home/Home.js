@@ -44,19 +44,19 @@ function Home(props) {
                             <span class="block ">vos Portefeuilles</span>
                         </h1>
 
-                        <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl md:mt-5 md:text-xl lg:mx-0">S'inspirer des portfeilles publics deviens plus facile</p>
+                        <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl md:mt-5 md:text-xl lg:mx-0">S'inspirer des portefeuilles publics deviens plus facile</p>
                     </div>
 
                     <div class="mt-8 w-full">
                             <Link to="/portfolios" >
-                                <button className="btn-primary text-xl">  Esseyer Gratuitement</button>
+                                <button className="btn-primary text-xl">Essayer Gratuitement</button>
                             </Link>
                     </div>
                 </div>
             </header >
 
             <section className='w-full p-6 bg-gray-50 dark:bg-slate-700'>
-                <p className='text-center text-xl text-primary'> Rejoinez la communauté</p>
+                <p className='text-center text-xl text-primary'> Rejoignez la communauté</p>
                 <div className='flex justify-evenly p-6'>
                     <div className='flex flex-col'>
                         <h3 className='text-center text-primary text-5xl'>5</h3>
@@ -77,22 +77,22 @@ function Home(props) {
                             <h4 className='mb'>Tracker votre portfolio</h4>
                         </div>
                         <p className='text-md text-gray-600'>Suivrez vos performances</p>
-                        <p className='text-md text-gray-600'>Comparer vos performances les indices et les autres portfeilles</p>
+                        <p className='text-md text-gray-600'>Comparer vos performances les indices et les autres portefeuilles</p>
                     </div>
                     <div className='shadow-md p-6 bg-white md:w-1/4 w-full m-4 bg-dark bg-blue-50 dark:bg-slate-700 rounded'>
                         <div className='flex gap-4 content-center items-center'>
                             <div className='w-12 h-12 bg-sky-500 rounded-md'>i</div>
                             <h4 className='mb'>Inspirez vous</h4>
                         </div>
-                        <p className='text-md text-gray-600'>Recherche simple de portfeilles</p>
-                        <p className='text-md text-gray-600'>Plein de statistiques sur les portfeilles</p>
+                        <p className='text-md text-gray-600'>Recherche simple de portefeuilles</p>
+                        <p className='text-md text-gray-600'>Plein de statistiques sur les portefeuilles</p>
                     </div>
                     <div className='shadow-md p-6 bg-white md:w-1/4 w-full m-4 bg-dark bg-blue-50 dark:bg-slate-700 rounded'>
                         <div className='flex gap-4 content-center items-center'>
                             <div className='w-12 h-12 bg-sky-500 rounded-md'>i</div>
                             <h4 className='mb'>Partagez</h4>
                         </div>
-                        <p className='text-md text-gray-600'>Partager vous portfeilles avec vos amis et la communauté</p>
+                        <p className='text-md text-gray-600'>Partager vous portefeuilles avec vos amis et la communauté</p>
                         <p className='text-md text-gray-600'>Comparer les performances et autres statistiques</p>
                     </div>
                     <div className='shadow-md p-6 bg-white md:w-1/4 w-full m-4 bg-dark bg-blue-50 dark:bg-slate-700 rounded'>
@@ -100,14 +100,14 @@ function Home(props) {
                             <div className='w-12 h-12 bg-sky-500 rounded-md'>i</div>
                             <h4 className='mb'>Saisie facile</h4>
                         </div>
-                        <p className='text-md text-gray-600'>import votre portfeuille a partir d'un fichier excel</p>
+                        <p className='text-md text-gray-600'>import votre portefeuille a partir d'un fichier Excel</p>
                     </div>
                     <div className='shadow-md p-6 bg-white md:w-1/4 w-full m-4 bg-dark bg-blue-50 dark:bg-slate-700 rounded'>
                         <div className='flex gap-4 content-center items-center'>
                             <div className='w-12 h-12 bg-sky-500 rounded-md'>i</div>
                             <h4 className='mb'>Alertes intelligentes</h4>
                         </div>
-                        <p className='text-md text-gray-600'>Soyez informés en temps réel des transactions des portfeulles que vos Suivez</p>
+                        <p className='text-md text-gray-600'>Soyez informés en temps réel des transactions des portefeuilles que vos Suivez</p>
                         <p className='text-md text-gray-600'>Notifications programmées</p>
                     </div>
 
@@ -116,7 +116,7 @@ function Home(props) {
                             <div className='w-12 h-12 bg-sky-500 rounded-md'>i</div>
                             <h4 className='mb'>Alertes intelligentes</h4>
                         </div>
-                        <p className='text-md text-gray-600'>Soyez informés en temps réel des transactions des portfeulles que vos Suivez</p>
+                        <p className='text-md text-gray-600'>Soyez informés en temps réel des transactions des portefeuilles que vos Suivez</p>
                         <p className='text-md text-gray-600'>Notifications programmées</p>
                     </div>
                 </div>

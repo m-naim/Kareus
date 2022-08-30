@@ -10,7 +10,7 @@ function AddPortfolio({ hide, addClick }) {
         <div className=" md:w-auto shadow-xl relative flex gap-6 flex-col  justify-center items-center bg-white py-12 px-12 rounded-md bg-dark ">
             <div class="flex gap-4 flex-col ">
                 <div className='flex gap-8 items-center justify-between'>
-                    <p class="text-xl font-semibold leading-7 lg:leading-9 text-gray-800" >Creer un portfeuille</p>
+                    <p class="text-xl font-semibold leading-7 lg:leading-9 text-gray-800" >Créer un portefeuille</p>
                     <div class="-mr-2">
                         <button type="button"
                             onClick={hide}
@@ -24,7 +24,7 @@ function AddPortfolio({ hide, addClick }) {
 
                 </div>
                 <div>
-                    <h1 role="main" class="text-lg font-semibold leading-7 lg:leading-9 text-gray-800">Nom du portfeuille</h1>
+                    <h1 role="main" class="text-lg font-semibold leading-7 lg:leading-9 text-gray-800">Nom du portefeuille</h1>
                     <input className='input-primary' type={'text'} value={name} onChange={(e) => setName(e.currentTarget.value)} />
                 </div>
 

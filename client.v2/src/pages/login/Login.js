@@ -51,7 +51,7 @@ function Login({ setToken }) {
                         </div>
                         <a href="#" class="ml-auto text-sm text-primary hover:underline">Mot de passe oublié?</a>
                     </div>
-                    <button type="submit" class="btn-primary" onClick={logIn}>Login to your account</button>
+                    <button type="submit" class="btn-primary" onClick={logIn}>Se connecter</button>
 
                     {message.length>0 && (
                             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
@@ -75,7 +75,7 @@ function Login({ setToken }) {
                     </button> */}
 
                     <div class="text-sm font-medium text-gray-500 dark:text-gray-300 p-2">
-                        Vous n'avez pas un compte? <Link class="text-primary hover:underline" to="/signup">Cree un compte</Link>
+                        Vous n'avez pas un compte? <Link class="text-primary hover:underline" to="/signup">Crée un compte</Link>
                     </div>
                 </form>
             </div>
