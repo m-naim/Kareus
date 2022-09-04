@@ -18,6 +18,7 @@ const chartDataInit = {
 }
 
 const chartOptions = {
+    responsive: true,
     radius: 0,
     intersect: true,
     interaction: {
@@ -31,6 +32,7 @@ let dividendsData = {};
 function DividendsView(props) {
 
     const { id } = useParams();
+    const [loading, setLoading] = useState(true);
     const [name, setName] = useState("");
     const [dates, setDates] = useState(chartDataInit.labels);
     const [perfs, setPerfs] = useState(chartDataInit.datasets[0].data);
@@ -59,6 +61,7 @@ function DividendsView(props) {
 
     useEffect(() => {
         fetchData();
+        setLoading(false)
     }, []);
 
     const handlePeriodClick = (period) => {
@@ -79,6 +82,8 @@ function DividendsView(props) {
     }
 
     return (
+
+        loading? <div>Loading ...</div>:
         <div className='flex flex-col lg:flex-row'>
 
             <div className='p-6 m-2 flex flex-col items-center  max-w-4xl'>

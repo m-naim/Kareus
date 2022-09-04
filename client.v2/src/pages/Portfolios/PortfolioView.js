@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import authService from 'services/authService';
 import portfolioService from 'services/portfolioService';
 import DeepLink from '../../components/DeepLink';
@@ -7,6 +7,8 @@ import { round10 } from '../../utils/decimalAjustement';
 
 
 function PortfolioView({ children, to, ...props }) {
+    
+    let navigate = useNavigate();
     const { id } = useParams();
     const [followed, setFollowed] = useState(false);
     const [editable, setEditable] = useState(false);
@@ -51,6 +53,7 @@ function PortfolioView({ children, to, ...props }) {
     const deletePortfolio = async () => {
         try {
             await portfolioService.deletePortfolio(id);
+            navigate("/portfolios");
         }
         catch {
             console.log("error");

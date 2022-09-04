@@ -73,6 +73,7 @@ function Performance() {
     const [name, setName] = useState("");
     const [dates, setDates] = useState(chartDataInit.labels);
     const [perfs, setPerfs] = useState(chartDataInit.datasets[0].data)
+    const [loading, setLoading] = useState(true);
 
     const [period, setPeriod] = useState('ALL');
     const [graphType, setType] = useState('%Variation');
@@ -84,7 +85,7 @@ function Performance() {
     }
     const fetchData = async () => {
         try {
-            portfolioService.getPerformances(id);
+            await portfolioService.getPerformances(id);
             const data = await portfolioService.get(id);
             datesInit = formatDateStr(data.perfs.date);
             perfsData = data.perfs;
@@ -149,6 +150,7 @@ function Performance() {
 
     useEffect(() => {
         fetchData();
+        setLoading(false)
     }, []);
 
 
@@ -222,6 +224,7 @@ function Performance() {
         );
     }
     return (
+        loading? <div>Calcule de performances en cours ...</div>:
         <div className='flex flex-col lg:flex-row max-w-6xl'>
 
             <div className='md:p-6 mt-2 flex flex-wrap justify-between items-center w-full'>
