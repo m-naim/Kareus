@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { format } from 'date-fns';
 import Selectable from 'components/Selectable';
 import MultiSelect from 'components/MultiSelect';
+import Autocomplite from 'components/Autocomplite';
+import portfolioService from 'services/portfolioService';
 
 function AddTransaction({ hide, addClick, symbol }) {
     const [ticker, setTicker] = useState(symbol);
@@ -9,6 +11,12 @@ function AddTransaction({ hide, addClick, symbol }) {
     const [qty, setQty] = useState(1);
     const [prix, setPrix] = useState(0);
     const [sense, setSense] = useState("buy");
+    const [options, setOptions] = useState([]);
+
+    const fetchData = async () => {
+        const response = await portfolioService.getStocksNameByName(ticker);
+        setOptions(response);
+    };
 
     return (
         <div className=" md:w-auto shadow-xl relative flex gap-6 flex-col  justify-center items-center bg-white py-8 px-12 rounded-md bg-dark ">
@@ -30,7 +38,12 @@ function AddTransaction({ hide, addClick, symbol }) {
                 <MultiSelect active={sense} select={setSense} list={['buy','sell']} />
                 <div>
                     <h3 role="main" class="text-lg font-semibold leading-7 lg:leading-9 text-gray-800">Action</h3>
-                    <input className='input-primary' type={'text'} value={ticker} onChange={(e) => setTicker(e.currentTarget.value.toLocaleUpperCase())} />
+                    <Autocomplite value={ticker} setValue={setTicker} options={options} fetchData={fetchData} />
+                </div>
+
+                <div>
+                    <h3 role="main" class="text-lg font-semibold leading-7 lg:leading-9 text-gray-800">Date</h3>
+                    <input className='input-primary' type='date' value={date} onChange={(e) =>{ setDate(e.currentTarget.value);}} />
                 </div>
                 <div>
                     <h3 role="main" class="text-lg font-semibold leading-7 lg:leading-9 text-gray-800">Prix</h3>
@@ -39,10 +52,6 @@ function AddTransaction({ hide, addClick, symbol }) {
                 <div>
                     <h3 role="main" class="text-lg font-semibold leading-7 lg:leading-9 text-gray-800">Quantité</h3>
                     <input className='input-primary' type='number' value={qty} onChange={(e) => setQty(e.currentTarget.value)} />
-                </div>
-                <div>
-                    <h3 role="main" class="text-lg font-semibold leading-7 lg:leading-9 text-gray-800">Date</h3>
-                    <input className='input-primary' type='date' value={date} onChange={(e) =>{ setDate(e.currentTarget.value); console.log(date);}} />
                 </div>
                 <button className='btn-primary  w-full' 
                     onClick={

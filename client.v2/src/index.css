@@ -51,7 +51,7 @@
   }
 
   .multi-select{
-    @apply flex gap-4 bg-gray-200 rounded-md p-1 dark:bg-gray-700
+    @apply flex gap-4 bg-gray-200 rounded-md p-1 dark:bg-gray-700 dark:border dark:border-gray-500
   }
 }
 
@@ -66,3 +66,5 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+
+

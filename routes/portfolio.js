@@ -129,4 +129,13 @@ router.put('/api/v1/movement/portfolio', (req, res) => {
       else res.send(state);
     });
 });
+
+router.delete('/api/v1/portfolio/:id',auth,(req, res) => {
+    Portfolio.deleteOne({ _id: req.params.id, owner: req.user })
+    .then(
+      () => res.status(201).send({ message: 'deleted with success' }),
+      (err) => res.status(500).send(err),
+    );
+});
+
 module.exports = router;

@@ -47,7 +47,6 @@ function DividendsView(props) {
         try {
             portfolioService.getDividends(id);
             const data = await portfolioService.get(id);
-            console.log(data);
             dividendsData = data.dividends;
             setName(data.name);
             setDates(get_years(dividendsData.yearly.Date))

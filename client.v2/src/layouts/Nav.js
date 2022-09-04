@@ -9,7 +9,6 @@ import logoutIcon from '../assets/img/logout.svg'
 function Nav(props) {
     const [popover, setPopover] = useState(false);
     const user = authService.getCurrentUser();
-    console.log(user);
     const close = () => setPopover(false);
     const logout = () => authService.logout();
     return (

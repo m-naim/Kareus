@@ -5,19 +5,35 @@ import portfolioService from 'services/portfolioService';
 import DeepLink from '../../components/DeepLink';
 import { round10 } from '../../utils/decimalAjustement';
 
+
 function PortfolioView({ children, to, ...props }) {
     const { id } = useParams();
     const [followed, setFollowed] = useState(false);
     const [editable, setEditable] = useState(false);
     const [pftData, setPftData] = useState([]);
+    const [variation, setVariation] = useState(0);
+    const [variationPct, setVariationPct] = useState(0);
 
     const fetchData = async () => {
         const response = await portfolioService.getData(id);
+        console.log(response);
         const userId = authService.getCurrentUser().user.id;
         if (response.followers.includes(userId)) setFollowed(true);
         if (response.owner === userId) setEditable(true);
+        getDayVariation(response.perfs.total)
         setPftData(response);
     };
+
+    const getDayVariation= (total)=>{
+        if(!total){
+            console.error(total);
+            return
+        }
+        const last= total.length
+        setVariation(round10(total[last-1]-total[last-2],-2))
+        setVariationPct(round10((total[last-1]-total[last-2])/total[last-2]*100,-2))
+    }
+
     useLayoutEffect(() => {
         fetchData();
     }, []);
@@ -41,6 +57,16 @@ function PortfolioView({ children, to, ...props }) {
         }
     }
 
+    const camputeRandement=()=>{
+        if(pftData.dividends=== undefined) return 0
+        const last= pftData.dividends.yearly.values.slice(-1);
+        return round10(last/pftData.total_value*100, -2)
+    }
+
+    const  getPctRandement=()=>{
+        if(pftData.dividends=== undefined) return 0
+        return round10(pftData?.dividends.yearly.values.reduce((cum, e) => cum + e , 0), -2)
+    }
     return (
         <div className=' flex flex-col place-items-center bg-dark w-full overflow-hidden'>
             <div className='flex flex-col place-content-between bg-white bg-dark p-4 w-full max-w-6xl rounded-md mt-2'>
@@ -48,10 +74,10 @@ function PortfolioView({ children, to, ...props }) {
 
                     <div className='flex flex-col self-start items-start'>
                         <h3>{pftData.name}</h3>
-                        <p>x abonnées</p>
+                        <p className='text-gray-500'> {pftData.followers?.length} abonnées</p>
                     </div>
                     <div className='flex gap-4 items-center m-1'>
-                        <button onClick={follow} className={'flex items-center shadow-md text-gray-500  hover:bg-gray-100 text-white py-1 px-4 rounded-xl border focus:outline-none focus:shadow-outline' + (followed ? ' text-amber-300' : '')}>
+                        <button onClick={follow} className={'flex items-center border text-gray-600  hover:shadow-md dark:text-white py-1 px-4 rounded-xl border focus:outline-none focus:shadow-outline' + (followed ? ' text-amber-500 dark:text-amber-300' : '')}>
                             <svg viewBox="0 0 1000 1000" width="1rem" height="1rem" aria-hidden="true">
                                 <path
                                     fill="currentColor"
@@ -63,8 +89,8 @@ function PortfolioView({ children, to, ...props }) {
 
                         {editable &&
                             <>
-                                <button onClick={deletePortfolio} className='shadow-md text-gray-500  hover:bg-gray-100 text-white py-1 px-4 rounded-xl border focus:outline-none focus:shadow-outline'>Supprimer</button>
-                                <button onClick={deletePortfolio} className='shadow-md text-gray-500  hover:bg-gray-100 text-white py-1 px-4 rounded-xl border focus:outline-none focus:shadow-outline'>Modifier</button>
+                                <button onClick={deletePortfolio} className='border text-gray-600  hover:shadow-md dark:text-white py-1 px-4 rounded-xl border focus:outline-none focus:shadow-outline'>Supprimer</button>
+                                <button className='border text-gray-600  hover:shadow-md dark:text-white py-1 px-4 rounded-xl border focus:outline-none focus:shadow-outline'>Modifier</button>
                             </>
                         }
                         {/* <button className='shadow-md text-gray-500  hover:bg-gray-100 text-white py-1 px-4 rounded-xl border focus:outline-none focus:shadow-outline'>Partager</button> */}
@@ -76,8 +102,8 @@ function PortfolioView({ children, to, ...props }) {
                         <div className='flex gap-4'>
                             <p>{round10(pftData.total_value, -2)}€</p>
                             {pftData.perf > 0 ?
-                                <p className='text-lg text-green-900 bg-green-200 rounded-md px-2 py-1'> + {round10(pftData.perf * 100, -2)}%</p>
-                                : <p className='text-lg text-red-900 bg-red-200 rounded-md px-2 py-1'> - {round10(pftData.perf * 100, -2)}%</p>
+                                <p className='text-sm text-green-900 bg-green-200 rounded-md px-2 py-1'> + {round10(pftData.perf * 100, -2)}%</p>
+                                : <p className='text-sm text-red-900 bg-red-200 rounded-md px-2 py-1'> - {round10(pftData.perf * 100, -2)}%</p>
                             }
                         </div>
                     </div>
@@ -85,16 +111,16 @@ function PortfolioView({ children, to, ...props }) {
                     <div className='flex flex-col'>
                         <p>Variation du jour</p>
                         <div className='flex gap-4'>
-                            <p>x %</p>
-                            <p>+xxx €</p>
+                            <p>{variationPct} %</p>
+                            <p>{variation} €</p>
                         </div>
                     </div>
 
                     <div className='flex flex-col'>
                         <p>Rendement</p>
                         <div className='flex gap-4'>
-                            <p> x%</p>
-                            <p>+ x</p>
+                            <p> {camputeRandement()} %</p>
+                            <p>+ {getPctRandement()}</p>
                         </div>
                     </div>
                 </div>

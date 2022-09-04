@@ -73,7 +73,7 @@ function Home(props) {
                 <div className='flex flex-wrap justify-center -m-4'>
                     <div className='shadow-md p-6 bg-white md:w-1/4 w-full m-4 bg-dark bg-blue-50 dark:bg-slate-700 rounded'>
                         <div className='flex gap-4 content-center items-center'>
-                            <div className='w-12 h-12 bg-sky-500 rounded-md'>i</div>
+                            <div className='w-12 h-12 text-primary rounded-md'><img src="https://img.icons8.com/color/48/000000/combo-chart--v2.png"/></div>
                             <h4 className='mb'>Tracker votre portfolio</h4>
                         </div>
                         <p className='text-md text-gray-600'>Suivrez vos performances</p>
@@ -81,7 +81,8 @@ function Home(props) {
                     </div>
                     <div className='shadow-md p-6 bg-white md:w-1/4 w-full m-4 bg-dark bg-blue-50 dark:bg-slate-700 rounded'>
                         <div className='flex gap-4 content-center items-center'>
-                            <div className='w-12 h-12 bg-sky-500 rounded-md'>i</div>
+                            <div className='w-12 h-12 rounded-md'><img src="https://img.icons8.com/nolan/96/light.png"/></div>
+                            
                             <h4 className='mb'>Inspirez vous</h4>
                         </div>
                         <p className='text-md text-gray-600'>Recherche simple de portefeuilles</p>
@@ -89,7 +90,7 @@ function Home(props) {
                     </div>
                     <div className='shadow-md p-6 bg-white md:w-1/4 w-full m-4 bg-dark bg-blue-50 dark:bg-slate-700 rounded'>
                         <div className='flex gap-4 content-center items-center'>
-                            <div className='w-12 h-12 bg-sky-500 rounded-md'>i</div>
+                            <div className='w-12 h-12 rounded-md'><img src="https://img.icons8.com/color/48/000000/share--v2.png"/></div>
                             <h4 className='mb'>Partagez</h4>
                         </div>
                         <p className='text-md text-gray-600'>Partager vous portefeuilles avec vos amis et la communauté</p>
@@ -97,14 +98,14 @@ function Home(props) {
                     </div>
                     <div className='shadow-md p-6 bg-white md:w-1/4 w-full m-4 bg-dark bg-blue-50 dark:bg-slate-700 rounded'>
                         <div className='flex gap-4 content-center items-center'>
-                            <div className='w-12 h-12 bg-sky-500 rounded-md'>i</div>
+                            <div className='w-12 h-12 rounded-md'><img src="https://img.icons8.com/3d-fluency/100/000000/document.png"/></div>
                             <h4 className='mb'>Saisie facile</h4>
                         </div>
                         <p className='text-md text-gray-600'>import votre portefeuille a partir d'un fichier Excel</p>
                     </div>
                     <div className='shadow-md p-6 bg-white md:w-1/4 w-full m-4 bg-dark bg-blue-50 dark:bg-slate-700 rounded'>
                         <div className='flex gap-4 content-center items-center'>
-                            <div className='w-12 h-12 bg-sky-500 rounded-md'>i</div>
+                            <div className='w-12 h-12 rounded-md'><img src="https://img.icons8.com/ios-filled/50/228BE6/bell.png"/></div>
                             <h4 className='mb'>Alertes intelligentes</h4>
                         </div>
                         <p className='text-md text-gray-600'>Soyez informés en temps réel des transactions des portefeuilles que vos Suivez</p>
@@ -113,11 +114,10 @@ function Home(props) {
 
                     <div className='shadow-md p-6 bg-white md:w-1/4 w-full m-4 bg-dark bg-blue-50 dark:bg-slate-700 rounded'>
                         <div className='flex gap-4 content-center items-center'>
-                            <div className='w-12 h-12 bg-sky-500 rounded-md'>i</div>
-                            <h4 className='mb'>Alertes intelligentes</h4>
+                            <div className='w-12 h-12 rounded-md'><img src="https://img.icons8.com/external-nawicon-glyph-nawicon/64/228BE6/external-tax-business-nawicon-glyph-nawicon.png"/></div>
+                            <h4 className='mb'>Calcule des Impôts </h4>
                         </div>
-                        <p className='text-md text-gray-600'>Soyez informés en temps réel des transactions des portefeuilles que vos Suivez</p>
-                        <p className='text-md text-gray-600'>Notifications programmées</p>
+                        <p className='text-md text-gray-600'>gérer automatiquement le rapport pour Impôts à payer</p>
                     </div>
                 </div>
             </section>

@@ -1,18 +1,18 @@
-import {React,useState,useLayoutEffect} from 'react';
+import { React, useState, useLayoutEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import portfolioService from '../../services/portfolioService'
 
 function StatisticsView(props) {
-    const {id} = useParams();
+    const { id } = useParams();
     const [portfolio, setPortfolio] = useState();
 
     const fetchData = async () => {
-        try{
+        try {
             const data = await portfolioService.getMetrics(id);
             console.log(data);
-            setPortfolio(data);
+            setPortfolio(data[0]);
         }
-        catch{
+        catch {
             console.log("error api");
             setPortfolio();
         }
@@ -20,11 +20,23 @@ function StatisticsView(props) {
 
     useLayoutEffect(() => {
         fetchData();
-    },[]);
+    }, []);
 
     return (
         <div>
-           
+            <h3>Analyse quantitative</h3>
+            <div className='grid max-w-6xl grid-cols-2 gap-4'>
+                {
+                    portfolio && Object
+                        .entries(portfolio)
+                        .map(([k, v]) =>
+                            <div className='flex gap-4'>
+                                <div>{k}</div>
+                                <div>{v}</div>
+                            </div>
+                        )
+                }
+            </div>
         </div>
     );
 }

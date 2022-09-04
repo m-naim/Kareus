@@ -74,7 +74,7 @@ function AllocationPie({ adata }) {
       ]
     };
 
-    console.log(allocation);
+
     data.labels = allocation.map(s => s.name)
     data.datasets[0].data = allocation.map(s => s.weight * 100)
     data.datasets[0].backgroundColor = palette('tol-rainbow', allocation.length).map(function (hex) {
@@ -105,7 +105,7 @@ function AllocationPie({ adata }) {
     <div className='w-full gap-4 flex flex-wrap place-content-around p-4  '>
       {['Actions', 'Secteurs', 'Industries', 'Devises'].map(type => {
         return (
-          <div className='w-full lg:w-1/3 shadow rounded-md p-4 max-w-[20em]' >
+          <div className='w-full lg:w-1/3 border rounded-md p-4 max-w-[20em]' >
             <Doughnut
               data={{
                 labels: getDisplay(type).labels,

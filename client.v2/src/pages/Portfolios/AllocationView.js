@@ -11,7 +11,6 @@ function AllocationView(props) {
     const [editable, setEditable] = useState(false);
 
     const fetchData = async () => {
-        console.log(id);
         try{
             const data = await portfolioService.get(id);
             const userId= authService.getCurrentUser().user.id;
@@ -38,7 +37,6 @@ function AllocationView(props) {
     },[]);
 
     const addtransaction= async (sense,ticker,prix,qty,date)=>{
-        console.log([sense,prix,ticker,qty,date]);
         const data = await portfolioService.AddTransaction(portfolio._id,sense,ticker,prix,qty,date);
         data.allocation= data.allocation.map((item, i) => {
             item.id = i + 1;

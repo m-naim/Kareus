@@ -69,7 +69,7 @@ function AddTransaction(idPft,sense,ticker,prix,qty,date) {
 }
 
 function deletePortfolio(id) {
-  return http.deleteReq(`${host}/api/v1/portfolio/delete/${id}`);
+  return http.deleteReq(`${host}/api/v1/portfolio/${id}`);
 }
 
 function getPerformances(id){
