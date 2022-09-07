@@ -14,9 +14,10 @@ router.get('/api/v1/stocks', (req, res) => {
 router.get('/api/v1/stocks/search/:symbol', (req, res) => {
   Stock.find({ symbol: new RegExp(`.*${req.params.symbol}.*`, 'i') })
     .exec((err, state) => {
+      console.log(state);
       if (err) res.status(500).send({ error: 'Something failed!' });
       else if (!state || state.length === 0) res.status(404).send({ message: 'not found' });
-      else res.send(state.map((s) => s.symbol));
+      else res.send(state.map((s) => ({ 'symbol': s.symbol, 'name': s.name, 'logo': s.logo })));
     });
 });
 router.get('/api/v1/stocks/:symbol', (req, res) => {

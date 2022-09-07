@@ -48,6 +48,7 @@ const portfolioSchema = new mongoose.Schema(
       date: [],
     },
     public: Boolean,
+    last_perfs_update: Date,
   },
 );
 

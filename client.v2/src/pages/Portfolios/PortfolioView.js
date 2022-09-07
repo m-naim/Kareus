@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useState } from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import authService from 'services/authService';
 import portfolioService from 'services/portfolioService';
+import stockService from 'services/stock.service';
 import DeepLink from '../../components/DeepLink';
 import { round10 } from '../../utils/decimalAjustement';
 
@@ -24,6 +25,7 @@ function PortfolioView({ children, to, ...props }) {
         if (response.owner === userId) setEditable(true);
         getDayVariation(response.perfs.total)
         setPftData(response);
+        await stockService.update(id);
     };
 
     const getDayVariation= (total)=>{

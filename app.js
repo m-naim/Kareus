@@ -15,6 +15,7 @@ const portfolio = require('./routes/portfolio');
 const stock = require('./routes/stock');
 const predictions = require('./routes/predictions');
 const watchList = require('./routes/watchlist');
+const health = require('./routes/health');
 
 require('dotenv').config();
 
@@ -62,6 +63,6 @@ app.use('/', portfolio);
 app.use('/', predictions);
 app.use('/', stock);
 app.use('/', watchList);
-// app.use('/', test);
+app.use('/', health);
 
 module.exports = app;

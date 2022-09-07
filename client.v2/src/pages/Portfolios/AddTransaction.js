@@ -11,16 +11,22 @@ function AddTransaction({ hide, addClick, symbol }) {
     const [qty, setQty] = useState(1);
     const [prix, setPrix] = useState(0);
     const [sense, setSense] = useState("buy");
-    const [options, setOptions] = useState([]);
+    
 
     const fetchData = async () => {
-        const response = await portfolioService.getStocksNameByName(ticker);
-        setOptions(response);
+        try{
+            const response = await portfolioService.getStocksNameByName(ticker);
+            console.log(response);
+            return response;
+        }
+        catch{
+            return [];
+        }
     };
 
     return (
-        <div className=" md:w-auto shadow-xl relative flex gap-6 flex-col  justify-center items-center bg-white py-8 px-12 rounded-md bg-dark ">
-            <div class="flex gap-4 flex-col ">
+        <div className="w-full max-w-xl shadow-xl relative flex gap-6 flex-col  justify-center items-center bg-white py-8 px-12 rounded-md bg-dark ">
+            <div class="flex gap-4 flex-col w-full">
                 <div className='flex gap-8 items-center justify-between'>
                     <p class="text-xl font-semibold leading-7 lg:leading-9 text-gray-800" >Ajouter une transaction</p>
                     <div class="-mr-2">
@@ -38,7 +44,7 @@ function AddTransaction({ hide, addClick, symbol }) {
                 <MultiSelect active={sense} select={setSense} list={['buy','sell']} />
                 <div>
                     <h3 role="main" class="text-lg font-semibold leading-7 lg:leading-9 text-gray-800">Action</h3>
-                    <Autocomplite value={ticker} setValue={setTicker} options={options} fetchData={fetchData} />
+                    <Autocomplite value={ticker} setValue={setTicker} fetchData={fetchData} />
                 </div>
 
                 <div>

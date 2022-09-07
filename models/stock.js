@@ -12,6 +12,7 @@ const stockSchema = new mongoose.Schema(
     industry: String,
     sector: String,
     last_update: Date,
+    logo: String,
   },
 );
 

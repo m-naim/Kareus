@@ -93,6 +93,7 @@ function Performance() {
             setName(data.name);
             setDates(datesInit)
             setPerfs(perfsData.performance);
+            setLoading(false)
         }
         catch {
             console.log("error api");
@@ -126,6 +127,7 @@ function Performance() {
     const fetchIndex = async (idxName, length = datesInit.length) => {
 
         const data = await portfolioService.getStocksContains(idxName);
+        console.log(data);
         let values = data[0].history.slice(-length).map(h => h.Close)
 
         let x = 1;
@@ -150,7 +152,7 @@ function Performance() {
 
     useEffect(() => {
         fetchData();
-        setLoading(false)
+        
     }, []);
 
 

@@ -110,7 +110,7 @@ router.put('/api/v1/transaction/portfolio', async (req, res) => {
       elm.weight = elm.total_value / totalValue;
       return elm;
     });
-
+    pft.last_perfs_update= null;
     pft.save();
     res.send(pft);
   } catch (err) {
