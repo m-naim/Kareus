@@ -8,7 +8,7 @@ const config = {
     QWANTAPI_URL: 'https://qwantapi.herokuapp.com',
   },
   production: {
-    API_URL: 'https://kareus-6ihq-30svuj2a3-m-naim.vercel.app',
+    API_URL: 'https://kareus.vercel.app/',
     amqpUrl: 'amqp://localhost:5672',
     QWANTAPI_URL: 'https://qwantapi.herokuapp.com',
   },
