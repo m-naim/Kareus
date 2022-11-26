@@ -4,7 +4,8 @@ import { useParams } from 'react-router-dom';
 import portfolioService from '../../services/portfolioService'
 import authService from 'services/authService';
 
-const columns=['symbol','weight','qty','last','bpe'] 
+const columns=['symbol','weight','qty','last','bep'] 
+
 function AllocationView(props) {
     const {id} = useParams();
     const [portfolio, setPortfolio] = useState({allocation:[],transactions:[]});
@@ -25,6 +26,7 @@ function AllocationView(props) {
             });
             if(data.owner===userId) setEditable(true);
             setPortfolio(data);
+            console.log(portfolio);
         }
         catch{
             console.log("error api");
@@ -53,7 +55,7 @@ function AllocationView(props) {
 
     return (
         <div>
-            <Table columns={columns} editable={editable} rows={portfolio.allocation} addtransaction={addtransaction}/>
+            <Table columns={columns} editable={editable} propRows={portfolio.allocation} addtransaction={addtransaction}/>
         </div>
     );
 }

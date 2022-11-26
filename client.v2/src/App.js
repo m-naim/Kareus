@@ -19,6 +19,7 @@ import PrivateRoute from "./components/PrivateRoute"
 import ExplorerView from 'pages/explorer/ExplorerView';
 import DividendsView from 'pages/Portfolios/DividendsView';
 import StatisticsView from 'pages/Portfolios/StatisticsView';
+import StocksList from 'pages/stocks/StocksList';
 
 Chart.register(...registerables)
 
@@ -49,6 +50,7 @@ function App() {
           </Route>
         </Route>
         <Route path="/watchLists" element={<WatchListView />} />
+        <Route path="/stocks" element={<StocksList />} />
       </Routes>
     </div>
   );

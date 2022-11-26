@@ -1,8 +1,10 @@
+import PortfolioVariation from 'components/PortfolioVariation';
 import React, { useLayoutEffect, useState } from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import authService from 'services/authService';
 import portfolioService from 'services/portfolioService';
 import stockService from 'services/stock.service';
+import { getVariation } from 'utils/portfolio.utils';
 import DeepLink from '../../components/DeepLink';
 import { round10 } from '../../utils/decimalAjustement';
 
@@ -106,10 +108,7 @@ function PortfolioView({ children, to, ...props }) {
                         <p>Valeur Total</p>
                         <div className='flex gap-4'>
                             <p>{round10(pftData.total_value, -2)}€</p>
-                            {pftData.perf > 0 ?
-                                <p className='text-sm text-green-900 bg-green-200 rounded-md px-2 py-1'> + {round10(pftData.perf * 100, -2)}%</p>
-                                : <p className='text-sm text-red-900 bg-red-200 rounded-md px-2 py-1'> - {round10(pftData.perf * 100, -2)}%</p>
-                            }
+                            <PortfolioVariation pft={pftData}/>
                         </div>
                     </div>
 

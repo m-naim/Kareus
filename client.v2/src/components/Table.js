@@ -1,23 +1,38 @@
 import { format } from 'date-fns';
 import useModal from 'hooks/UseModal';
 import AddTransaction from 'pages/Portfolios/AddTransaction';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { comparator } from 'utils/utils';
 import data from '../mock/data';
 import { round10 } from '../utils/decimalAjustement';
 import Modal from './Modal';
 
 const toPrecentille = (val) => round10(val * 100, -2) + '%';
 
-function Table({ rows = data.rows, columns = data.columns, addtransaction, type = 'allocation', editable }) {
+function Table({ propRows = data.rows, columns = data.columns, addtransaction, type = 'allocation', editable }) {
     const { isShowing, toggle } = useModal();
     const [ticker, setTicker] = useState("");
+
+    const [columnSorting, setColumnSorting] = useState("");
+    const [sortSens, setSortSens] = useState(1);
+
+    const [rows, setRows] = useState(propRows);
 
     const addclick = (value) => {
         setTicker(value);
         toggle();
     }
 
+    const sortby= (column)=>{
+        setSortSens(sortSens*-1)
+        setColumnSorting(column)
+        console.log(column);
+        setRows(rows.sort((a,b)=>comparator(a[column],b[column])*sortSens))
+    }
 
+    useEffect(()=>{
+        setRows(propRows)
+    },[propRows])
 
     return (
         <div >
@@ -31,11 +46,15 @@ function Table({ rows = data.rows, columns = data.columns, addtransaction, type 
                     <AddTransaction hide={toggle} addClick={addtransaction} symbol={ticker} />
                 </Modal>
             </div>
-            <table class="table-auto w-full">
+            <table class="table-fixed w-full">
                 <thead>
                     <tr className="border-collapse border-b border-gray-200 ">
                         <th></th>
-                        {columns.map(c => <th class="text-left text-gray-600 dark:text-gray-300" >{c}</th>)}
+                        {columns.map(c => 
+                        <th onClick={()=>sortby(c)} 
+                        class="text-left text-gray-600 dark:text-gray-300" >{c} 
+                        {c==columnSorting && ' S'}
+                        </th>)}
                     </tr>
                 </thead>
                 <tbody>
@@ -48,7 +67,7 @@ function Table({ rows = data.rows, columns = data.columns, addtransaction, type 
 
 const AllocationLine = (r, addclick,editable) => {
     return (<tr className="border-collapse border-b border-gray-200 dark:border-slate-600">
-        <td >
+        <td className=''>
             {editable &&
             <button type="button"
                 onClick={() => addclick(r.symbol)}
@@ -58,9 +77,9 @@ const AllocationLine = (r, addclick,editable) => {
             </button>
             }
         </td>
-        <td >
-            <div className='flex flex-col'>
-                <p>{r.asset.name}</p>
+        <td className=''>
+            <div className='flex flex-col w-fit '>
+                <p className=''>{r.asset.name}</p>
                 <p className='text-xs align-middle text-blue-500 rounded p-1 w-fit '>{r.symbol}</p>
             </div>
         </td>

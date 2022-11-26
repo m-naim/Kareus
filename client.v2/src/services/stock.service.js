@@ -5,11 +5,16 @@ const host = config.API_URL;
 const qwantHost= config.QWANTAPI_URL;
 
 function update(id){
-    return http.get(`${qwantHost}/api/v1/stock/${id}/`);
+    return http.get(`${qwantHost}/api/v1/update/stocks/${id}/`);
+}
+
+function getAll(id){
+    return http.get(`${host}/api/v1/stocks/`);
 }
 
 const stockService={
-    update
+    update,
+    getAll
 }
 
 

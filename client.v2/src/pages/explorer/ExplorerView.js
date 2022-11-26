@@ -8,6 +8,7 @@ function ExplorerView(props) {
     
     const fetchData = async () => {
         const response = await portfolioService.getAll();
+        console.log(response);
         setPftArray(response);
     };
     useLayoutEffect(() => {

@@ -5,7 +5,6 @@ function Autocomplite({ value, setValue, fetchData }) {
     const [show, setShow] = useState(false);
 
     const select = (value) => {
-        console.log(value);
         setValue(value)
         setOptions([])
     }
@@ -20,13 +19,14 @@ function Autocomplite({ value, setValue, fetchData }) {
                 }
                 onChange={
                     async (e) => {
-                        const { value } = e.currentTarget
-                        setValue(value);
-                        if (value.length < 3) {
-                            setOptions([])
-                            return
+                        const  currentValue = e.currentTarget.value
+                        setValue(currentValue);
+                        if (currentValue.length < 1) { 
+                            setOptions([]) 
+                            return 
                         }
-                        let data = await fetchData();
+                        let data = await fetchData(currentValue);
+                        console.log(data);
                         setOptions(data)
                     }
                 } />

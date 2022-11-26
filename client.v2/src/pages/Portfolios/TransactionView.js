@@ -49,7 +49,7 @@ function TransactionView(props) {
 
     return (
         <div>
-            <Table columns={columns} rows={portfolio.transactions} addtransaction={addtransaction} type={'transaction'}/>
+            <Table columns={columns} propRows={portfolio.transactions} addtransaction={addtransaction} type={'transaction'}/>
         </div>
     );
 }

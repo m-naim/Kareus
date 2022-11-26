@@ -13,10 +13,9 @@ function AddTransaction({ hide, addClick, symbol }) {
     const [sense, setSense] = useState("buy");
     
 
-    const fetchData = async () => {
+    const fetchData = async (e) => {
         try{
-            const response = await portfolioService.getStocksNameByName(ticker);
-            console.log(response);
+            const response = await portfolioService.getStocksNameByName(e);
             return response;
         }
         catch{
